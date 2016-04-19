@@ -1,0 +1,14 @@
+select {
+    border: 1px solid #DFDFDF;
+    border-radius: 5px;
+    margin: 0px 16.4px 0px 0px;
+    padding: 5px 20px 6px 10px;
+    width: 100%;
+    display: block;
+    float: left;
+    background: transparent url("/static/imgs/select_bg.jpg") no-repeat scroll right center;
+    outline: medium solid transparent;
+    -moz-appearance: none;
+    text-indent: 0.01px;
+    text-overflow: "";
+}
