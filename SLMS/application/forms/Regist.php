@@ -30,6 +30,14 @@ class Application_Form_Regist extends Zend_Form
         $confirmPassword->setLabel('Confirm Password: *');
         $confirmPassword->setAttrib('class','form-control');
         $confirmPassword->setRequired(true);
+
+        $gender = new Zend_Form_Element_Radio('gender');
+        $gender->setLabel('Gender :');
+        $gender->setRequired(true);
+        $gender->setSeparator('');
+        $gender->setMultiOptions(array('male' => 'Male ','Female' => 'female'));
+        $gender->addErrorMessage('Please select male or female.');
+        $gender->addValidator('NotEmpty');
                 
         $register = new Zend_Form_Element_Submit('Register');
         $register->setLabel('Sign up');
@@ -40,6 +48,7 @@ class Application_Form_Regist extends Zend_Form
                         $email,
                         $password,
                         $confirmPassword,
+                        $gender,
                         $register,
         ));
     }
