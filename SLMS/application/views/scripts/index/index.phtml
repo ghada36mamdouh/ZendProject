@@ -1,4 +1,4 @@
-<?php $login=1;?>
+
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -16,23 +16,31 @@
               <div class="navbar-header active">
                 <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>">Home</a>
               </div>
-              <li><a href="<?php echo $this->baseUrl(); ?>/Posts/list">Courses</a></li>
-              <li><a href="<?php echo $this->baseUrl(); ?>/Users">Users</a></li>
+              <li><a href="<?php echo $this->baseUrl(); ?>">Courses</a></li>
+              <li><a href="<?php echo $this->baseUrl(); ?>">Users</a></li>
               <li><a href="#">Admin</a></li>
             </ul>
             </div>
             <div class="col-sm-2">
               
-              <?php if($login==1){
+              <?php if(!$this->logged){
                 ?>
              
                 <dir class="navbar-right">
-                    <button type="button" class=" btn-link" data-toggle="modal" data-target="#login">Login</button>| <button type="button" class=" btn-link" data-toggle="modal" data-target="#regist">Regist</button>
+                    <button type="button" class=" btn-link" data-toggle="modal" data-target="#login" >Login</button>| <button type="button" class=" btn-link" data-toggle="modal" data-target="#regist">Regist</button>
                 </dir>
               
               <?php
             }
+            else
+            {
+              ?>
+                <dir class="navbar-right">
+                    <a href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link">Logout</a>
+                </dir>
 
+            <?php
+            }
               ?>
             </div>
         </div>
@@ -60,7 +68,18 @@
           <h4 class="modal-title">Modal Header</h4>
         </div>
         <div class="modal-body">
-          <p>Some text in the modal.</p>
+          <?php
+
+                if(isset($this->errorMessage)){
+
+                            echo $this->errorMessage;
+
+                }?>
+
+                <?php
+
+                            echo $this->form;
+                ?>
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
@@ -85,7 +104,20 @@
           <h4 class="modal-title">Modal Header</h4>
         </div>
         <div class="modal-body">
-          <p>Some text regist the modal.</p>
+                 <?php
+
+                if(isset($this->errorMessage)){
+
+                            echo $this->errorMessage;
+
+                }?>
+
+                <?php
+
+                            echo $this->form;
+
+                ?>
+
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
