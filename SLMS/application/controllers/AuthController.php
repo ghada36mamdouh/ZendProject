@@ -47,6 +47,28 @@ class AuthController extends Zend_Controller_Action
     public function signupAction()
     {
         // action body
+        $users = new Application_Model_DbTable_User();
+        $form = new Application_Form_Regist();
+
+        if($this->getRequest()->isPost()){
+            
+            if($form->isValid($_POST)){
+                $data = $form->getValues();
+                if($data['password'] != $data['confirmPassword']){
+                    $this->view->errorMessage = "Password and confirm password don't match.";
+                    return;
+                }
+                if($users->checkUnique($data['email'])){
+                    $this->view->errorMessage = "Email already taken. Please choose another one.";
+                    return;
+                }
+                unset($data['confirmPassword']);
+                var_dump($data);
+                $users->insert($data);
+                /*
+                $this->redirect('auth/login');*/
+            }
+        }
     }
 
     public function homeAction()
@@ -66,7 +88,6 @@ class AuthController extends Zend_Controller_Action
         $storage->clear();
         $this->_redirect('/');
     }
-
 
 }
 
