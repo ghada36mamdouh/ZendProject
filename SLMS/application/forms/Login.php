@@ -23,7 +23,8 @@ class Application_Form_Login extends Zend_Form
                 
         $signin = new Zend_Form_Element_Submit('Login');
         $signin->setLabel('Sign in');														
-        $signin->setAttrib('class','btn-primary btn');
+        $signin->setAttrib('class','btn-primary btn form-control');
+
                 
         $this->addElements(array(
                         $email,

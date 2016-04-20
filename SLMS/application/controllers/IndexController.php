@@ -21,8 +21,11 @@ class IndexController extends Zend_Controller_Action
     	}
     	else
     	{
-	        $form = new Application_Form_Login();
-	        $this->view->form = $form;
+	        $logInform = new Application_Form_Login();
+	        $this->view->loginform = $logInform;
+
+            $registform = new Application_Form_Regist();
+            $this->view->registform = $registform;
     	}
 
     }

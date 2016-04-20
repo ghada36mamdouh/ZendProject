@@ -25,6 +25,7 @@
       <formsDirectory>
         <formFile formName="Users"/>
         <formFile formName="Login"/>
+        <formFile formName="Regist"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>
