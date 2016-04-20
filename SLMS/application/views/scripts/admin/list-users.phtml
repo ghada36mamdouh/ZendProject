@@ -1,0 +1,39 @@
+	<div class="container center">
+	<!-- ###############  Header  ################## -->
+	<h1 align="center">All Users</h1><br />
+	<div class="table table-responsive" >
+		<a href="<?php echo $this->baseUrl(); ?>/User/add"> Add User </a>
+		<table class="table table-hover table-bordered">
+		    <thead>
+		      <tr>
+		      	<th>photo</th>
+		        <th>name</th>
+		        <th>email</th>
+		        <th>type</th>
+		        <th>gender</th>
+		        <th>country</th>
+		        <th>Actions</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    	<?php if($this->users) { 
+					for($i=0; $i<count($this->users); $i++){ ?>
+		      	<tr>
+			      	<td><img src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->users[$i]['photo']; ?>" width="50px" height="50px"/></td>
+			      	<td><?php echo $this->users[$i]['name']; ?></td>
+			      	<td><?php echo $this->users[$i]['email']; ?></td>
+			      	<td><?php echo $this->users[$i]['type']; ?></td>
+			      	<td><?php echo $this->users[$i]['gender']; ?></td>
+			      	<td><?php echo $this->users[$i]['country']; ?></td>
+			        <td>
+					    <a class="btn btn-success" href="<?php echo $this->baseUrl().'/User/edit/id/'.$this->users[$i]['id'] ?>">Edit</a>
+						<a class="btn btn-danger" href="<?php echo $this->baseUrl().'/User/delete/id/'.$this->users[$i]['id'] ?>">Delete</a>
+						<a class="btn btn-info" href="<?php echo $this->baseUrl().'/User/posts/id/'.$this->users[$i]['id'] ?>">viewPosts</a>
+			        </td>
+			    </tr>
+			    <?php }} ?>
+		    </tbody>
+		</table>
+		
+	</div>
+</div>

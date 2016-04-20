@@ -1,51 +1,40 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid row">
+    <div class="col-sm-10">
+    <ul class="nav navbar-nav">
+      <div class="navbar-header active">
+        <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>">Home</a>
+      </div>
+      <li><a href="<?php echo $this->baseUrl(); ?>">Courses</a></li>
+      <li><a href="<?php echo $this->baseUrl(); ?>">Users</a></li>
+      <li><a href="#">Admin</a></li>
+    </ul>
+    </div>
+    <div class="col-sm-2">
+      
+      <?php if(!$this->logged){
+        ?>
+     
+        <dir class="navbar-right">
+            <button type="button" class=" btn-link" data-toggle="modal" data-target="#login" >Login</button>| <button type="button" class=" btn-link" data-toggle="modal" data-target="#regist">Regist</button>
+        </dir>
+      
+      <?php
+    }
+    else
+    {
+      ?>
+        <dir class="navbar-right">
+            <a href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link">Logout</a>
+        </dir>
 
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <title>SLMS</title>
-    <link href="<?php echo ($this->baseUrl()); ?>/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
-    <script src="<?php echo($this->baseUrl()); ?>/js/jquery-1.12.3.js"></script>
-    
-    <script src="<?php echo($this->baseUrl()); ?>/js/bootstrap.min.js"></script>
-</head>
-<body style="background-color:#ccf2ff">
-    <nav class="navbar navbar-inverse">
-          <div class="container-fluid row">
-            <div class="col-sm-10">
-            <ul class="nav navbar-nav">
-              <div class="navbar-header active">
-                <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>">Home</a>
-              </div>
-              <li><a href="<?php echo $this->baseUrl(); ?>">Courses</a></li>
-              <li><a href="<?php echo $this->baseUrl(); ?>">Users</a></li>
-              <li><a href="#">Admin</a></li>
-            </ul>
-            </div>
-            <div class="col-sm-2">
-              
-              <?php if(!$this->logged){
-                ?>
-             
-                <dir class="navbar-right">
-                    <button type="button" class=" btn-link" data-toggle="modal" data-target="#login" >Login</button>| <button type="button" class=" btn-link" data-toggle="modal" data-target="#regist">Regist</button>
-                </dir>
-              
-              <?php
-            }
-            else
-            {
-              ?>
-                <dir class="navbar-right">
-                    <a href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link">Logout</a>
-                </dir>
+    <?php
+    }
+    ?>
+    </div>
+  </div>
+</nav>
 
-            <?php
-            }
-              ?>
-            </div>
-        </div>
-    </nav>
-    
 
 
 
@@ -127,7 +116,3 @@
     </div>
   </div>
 </div>
-
-</body>
-
-</html>

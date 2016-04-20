@@ -22,6 +22,16 @@
           <actionMethod actionName="logout"/>
         </controllerFile>
       </controllersDirectory>
+      <controllerFile controllerName="Admin">
+          <actionMethod actionName="index"/>
+          <actionMethod actionName="listUsers"/>
+      </controllerFile>
+      <formsDirectory enabled="false"/>
+      <layoutsDirectory>
+        <layoutScriptsDirectory>
+          <layoutScriptFile layoutName="layout"/>
+        </layoutScriptsDirectory>
+      </layoutsDirectory>
       <formsDirectory>
         <formFile formName="Users"/>
         <formFile formName="Login"/>
@@ -32,6 +42,23 @@
         <dbTableDirectory>
           <dbTableFile dbTableName="User"/>
         </dbTableDirectory>
+      </modelsDirectory>
+      <modelsDirectory>
+      <dbTableDirectory>
+        <dbTableFile dbTableName="Category"/>
+      </dbTableDirectory>
+      <dbTableDirectory>
+        <dbTableFile dbTableName="Course"/>
+      </dbTableDirectory>
+      <dbTableDirectory>
+        <dbTableFile dbTableName="Comment"/>
+      </dbTableDirectory>
+       <dbTableDirectory>
+        <dbTableFile dbTableName="Material"/>
+      </dbTableDirectory>
+      <dbTableDirectory>
+        <dbTableFile dbTableName="Request"/>
+      </dbTableDirectory>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -63,6 +90,12 @@
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
+        <viewControllerScriptsDirectory forControllerName="Admin">
+          <viewScriptFile forActionName="index"/>
+        </viewControllerScriptsDirectory>
+        <viewControllerScriptsDirectory forControllerName="Admin">
+          <viewScriptFile forActionName="listUsers"/>
+        </viewControllerScriptsDirectory>
         <viewFiltersDirectory enabled="false"/>
       </viewsDirectory>
       <bootstrapFile filesystemName="Bootstrap.php"/>
