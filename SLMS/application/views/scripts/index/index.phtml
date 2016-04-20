@@ -3,11 +3,19 @@
     <div class="col-sm-10">
     <ul class="nav navbar-nav">
       <div class="navbar-header active">
-        <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>">Home</a>
+        <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>"><span class="glyphicon glyphicon-home"> </span> Home</a>
       </div>
-      <li><a href="<?php echo $this->baseUrl(); ?>">Courses</a></li>
-      <li><a href="<?php echo $this->baseUrl(); ?>">Users</a></li>
-      <li><a href="#">Admin</a></li>
+      <li>
+          <a href="<?php echo $this->baseUrl(); ?>">
+          <span class="glyphicon glyphicon-tasks"> </span> Courses</a>
+      </li>
+      <li>
+          <a href="<?php echo $this->baseUrl(); ?>">
+          <span class="glyphicon glyphicon-user"> </span> Users</a>
+      </li>
+      <li>
+          <a href="#"><span class=""> </span> Admin</a>
+      </li>
     </ul>
     </div>
     <div class="col-sm-2">
@@ -16,7 +24,7 @@
         ?>
      
         <dir class="navbar-right">
-            <button type="button" class=" btn-link" data-toggle="modal" data-target="#login" >Login</button>| <button type="button" class=" btn-link" data-toggle="modal" data-target="#regist">Regist</button>
+            <button type="button" class=" btn-link" data-toggle="modal" data-target="#login" ><span class="glyphicon glyphicon-log-in"></span> Login</button>| <button type="button" class=" btn-link" data-toggle="modal" data-target="#regist">Regist</button>
         </dir>
       
       <?php
@@ -25,7 +33,7 @@
     {
       ?>
         <dir class="navbar-right">
-            <a href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link">Logout</a>
+            <a href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
         </dir>
 
     <?php

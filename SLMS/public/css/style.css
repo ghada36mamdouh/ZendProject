@@ -12,3 +12,7 @@ select {
     text-indent: 0.01px;
     text-overflow: "";
 }
+
+.actions{
+    float:right ;
+}
