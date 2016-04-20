@@ -38,6 +38,21 @@ class Application_Form_Regist extends Zend_Form
         $gender->setMultiOptions(array('male' => 'Male ','Female' => 'female'));
         $gender->addErrorMessage('Please select male or female.');
         $gender->addValidator('NotEmpty');
+
+		$country = new Zend_Form_Element_Select('country');
+
+		$country ->setLabel('Countries :');
+
+		$country->addMultiOptions(array(
+
+				'US' => 'United States',
+
+				'UK' => 'United Kingdom',
+
+				'EG' => 'Egypt'
+
+			));
+        $country->setAttrib('class','form-control');
                 
         $register = new Zend_Form_Element_Submit('Register');
         $register->setLabel('Sign up');
@@ -49,6 +64,7 @@ class Application_Form_Regist extends Zend_Form
                         $password,
                         $confirmPassword,
                         $gender,
+                        $country,
                         $register,
         ));
     }
