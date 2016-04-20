@@ -1,7 +1,7 @@
 
 <nav class="navbar navbar-inverse">
   <div class="container-fluid row">
-    <div class="col-sm-10">
+    <div class="col-sm-9">
     <ul class="nav navbar-nav">
       <div class="navbar-header active">
         <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>">Home</a>
@@ -12,13 +12,13 @@
         if($this->user['type'] == "admin")
         {
           ?>
-      <li><a href="#">Admin</a></li>
+      <li><a href="<?php echo $this->baseUrl(); ?>/admin">Admin</a></li>
       <?php
     }
     ?>
     </ul>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
       
       <?php if(!$this->logged){
         ?>
@@ -32,9 +32,15 @@
     else
     {
       ?>
-        <dir class="navbar-right">
-            <a href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link">Logout</a>
-        </dir>
+        <div class="col-sm-4 navbar-brand">
+          <a href="<?php echo $this->baseUrl(); ?>/auth/home"><?php echo $this->user['name'];?></a>
+        </div>
+        <div class="col-sm-4">
+          <img class="navbar-brand" src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->user['photo']; ?>"/>
+        </div>
+        <div class="col-sm-4">
+          <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link">Logout</a>
+        </div>
 
     <?php
     }
