@@ -64,9 +64,9 @@ class AuthController extends Zend_Controller_Action
                 }
                 unset($data['confirmPassword']);
                 var_dump($data);
-                $users->insert($data);
-                /*
-                $this->redirect('auth/login');*/
+                $users->addUser($data);
+                
+                $this->redirect('/');
             }
         }
     }
