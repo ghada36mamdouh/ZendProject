@@ -1,10 +1,12 @@
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid row">
-    <div class="col-sm-10">
+    <div class="col-sm-9">
     <ul class="nav navbar-nav">
       <div class="navbar-header active">
         <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>"><span class="glyphicon glyphicon-home"> </span> Home</a>
       </div>
+<<<<<<< HEAD
       <li>
           <a href="<?php echo $this->baseUrl(); ?>">
           <span class="glyphicon glyphicon-tasks"> </span> Courses</a>
@@ -16,9 +18,21 @@
       <li>
           <a href="#"><span class=""> </span> Admin</a>
       </li>
+=======
+      <li><a href="<?php echo $this->baseUrl(); ?>">Courses</a></li>
+      <li><a href="<?php echo $this->baseUrl(); ?>">Users</a></li>
+      <?php 
+        if($this->user['type'] == "admin")
+        {
+          ?>
+      <li><a href="<?php echo $this->baseUrl(); ?>/admin">Admin</a></li>
+      <?php
+    }
+    ?>
+>>>>>>> c47175566179a0055ab45f09e274540850ea10b0
     </ul>
     </div>
-    <div class="col-sm-2">
+    <div class="col-sm-3">
       
       <?php if(!$this->logged){
         ?>
@@ -32,9 +46,21 @@
     else
     {
       ?>
+<<<<<<< HEAD
         <dir class="navbar-right">
             <a href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
         </dir>
+=======
+        <div class="col-sm-4 navbar-brand">
+          <a href="<?php echo $this->baseUrl(); ?>/auth/home"><?php echo $this->user['name'];?></a>
+        </div>
+        <div class="col-sm-4">
+          <img class="navbar-brand" src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->user['photo']; ?>"/>
+        </div>
+        <div class="col-sm-4">
+          <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link">Logout</a>
+        </div>
+>>>>>>> c47175566179a0055ab45f09e274540850ea10b0
 
     <?php
     }
@@ -79,7 +105,7 @@
                 ?>
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
         </div>
       </div>
       
@@ -117,7 +143,7 @@
 
         </div>
         <div class="modal-footer">
-          <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+          <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
         </div>
       </div>
       

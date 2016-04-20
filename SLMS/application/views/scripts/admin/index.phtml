@@ -1,4 +1,21 @@
-<br /><br />
-<div id="view-content">
-	<p>View script for controller <b>Admin</b> and script/action name <b>index</b></p>
-</div>
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid row">
+    <div class="col-sm-9">
+    <ul class="nav navbar-nav">
+       <div class="navbar-header active">
+        <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>">Home</a>
+      </div>
+      <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-users">All Users</a></li>
+    </ul>
+    </div>
+    <div class="col-sm-1 navbar-brand">
+    	<a href="<?php echo $this->baseUrl(); ?>/auth/home"><?php echo $this->user['name'];?></a>
+    </div>
+    <div class="col-sm-1">
+    	<img class="navbar-brand" src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->user['photo']; ?>"/>
+    </div>
+    <div class="col-sm-1">
+    	<a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link">Logout</a>
+    </div>
+  </div>
+</nav>
