@@ -1,0 +1,55 @@
+<br /><br />
+<div id="view-content" class="container">
+	<!-- <p>View script for controller <b>Matrial</b> and script/action name <b>index</b></p> -->
+
+	<?php 
+		echo "<h3>Course ".$this->course[0]['name']."</h3>";
+		//var_dump($this->course) ;
+		//var_dump($this->courseMatrial) ;
+		echo "<br><br><br>";
+		//var_dump($this->materialComments[1]) ;
+		$materialComments = $this->materialComments ;
+		$courseMatrial = $this->courseMatrial ;
+		$baseUrl = $this->baseUrl() ;
+		echo '<a href="'.$baseUrl.'/Matrial/add?cid='.$this->course[0]['id'].'&cname='.$this->course[0]['name'].'" >Add Matrial</a>'   ;
+
+		function showMatrail ($type,$courseMatrial,$materialComments,$baseUrl) {
+			echo '<h4>'.$type.'</h4><hr/>' ;
+			for($i=0 ; $i<count($courseMatrial); $i++){
+				if($courseMatrial[$i]['type'] == $type){
+					//echo '<img src="'.$this->baseUrl().'images/icons/pdf.ico"/>' ;
+					$mid = $courseMatrial[$i]['id'] ;
+					echo '<div class="well well-sm" style="background-color:;">'.$courseMatrial[$i]['description'];
+					echo '<div class="actions"><a href="'.$baseUrl.'/Matrial/edit/id/'.$mid.'"><span class="glyphicon glyphicon-edit"><span>Edit </a>&nbsp;&nbsp;';
+
+					echo '<a href="'.$baseUrl.'/Matrial/delete/id/'.$mid.'"><span class="glyphicon glyphicon-trash" ></span>Delete </a>&nbsp;&nbsp;';
+
+					if($courseMatrial[$i]['enabledownload']){
+						echo '<a href="'.$baseUrl.'/Matrial/lock/id/'.$mid.'"><span class="glyphicon glyphicon-lock"><span>lock </a>&nbsp;&nbsp;' ;						
+					}else{
+						echo '<a href="'.$baseUrl.'/Matrial/lock/id/'.$mid.'">Unlock </a>&nbsp;&nbsp;' ;						
+					}					
+					if($courseMatrial[$i]['isshow']){
+						echo '<a href="'.$baseUrl.'/Matrial/visible/id/'.$mid.'"><span class="glyphicon glyphicon-eye-close"><span>hide </a>&nbsp; &nbsp;' ;
+					}else{
+
+						echo '<a href="'.$baseUrl.'/Matrial/visible/id/'.$mid.'"><span class="glyphicon glyphicon-eye-open"><span>show</a>&nbsp; &nbsp;' ;
+					}					
+
+					echo '</div></div>' ;
+					for($j=0 ; $j<count($materialComments[$mid]); $j++){
+						echo '<div>'.$materialComments[$mid][$j]['body'].'</div>' ;
+					}
+				}			
+			}
+			echo '<hr/>' ;
+		}
+		showMatrail ("pdf",$courseMatrial,$materialComments,$baseUrl) ;
+		showMatrail ("word",$courseMatrial,$materialComments,$baseUrl) ;
+		showMatrail ("vedio",$courseMatrial,$materialComments,$baseUrl) ;
+
+	?>  
+
+	
+
+</div>

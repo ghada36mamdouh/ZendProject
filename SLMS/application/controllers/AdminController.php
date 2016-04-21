@@ -17,8 +17,7 @@ class AdminController extends Zend_Controller_Action
        $this->courseModel=new Application_Model_DbTable_Course();
        $this->materialModel=new Application_Model_DbTable_Material();
        $this->commentModel=new Application_Model_DbTable_Comment();
-       $this->requestModel=new Application_Model_DbTable_Request();
-       
+       $this->requestModel=new Application_Model_DbTable_Request();      
     }
 
     public function indexAction()

@@ -2,7 +2,6 @@
 
 class Application_Model_DbTable_Material extends Zend_Db_Table_Abstract
 {
-
     protected $_name = 'materials';
 
     function addMaterial($data){
@@ -20,8 +19,8 @@ class Application_Model_DbTable_Material extends Zend_Db_Table_Abstract
 	function listMaterials(){
 		return $this->fetchAll()->toArray();
 	}
-	function listCourseMaterials($mid){
-		$sql = $this->select()->setIntegrityCheck(false)->where('mid='.$mid);
+	function listCourseMaterials($cid){
+		$sql = $this->select()->setIntegrityCheck(false)->where('course_id='.$cid);
 		return $this->fetchAll($sql)->toArray();
 	}
 	function getMaterialById($id){

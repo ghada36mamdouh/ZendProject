@@ -4,8 +4,21 @@
     <div class="col-sm-9">
     <ul class="nav navbar-nav">
       <div class="navbar-header active">
-        <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>">Home</a>
+        <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>"><span class="glyphicon glyphicon-home"> </span> Home</a>
       </div>
+<<<<<<< HEAD
+      <li>
+          <a href="<?php echo $this->baseUrl(); ?>">
+          <span class="glyphicon glyphicon-tasks"> </span> Courses</a>
+      </li>
+      <li>
+          <a href="<?php echo $this->baseUrl(); ?>">
+          <span class="glyphicon glyphicon-user"> </span> Users</a>
+      </li>
+      <li>
+          <a href="#"><span class=""> </span> Admin</a>
+      </li>
+=======
       <li><a href="<?php echo $this->baseUrl(); ?>">Courses</a></li>
       <li><a href="<?php echo $this->baseUrl(); ?>">Users</a></li>
       <?php 
@@ -16,6 +29,7 @@
       <?php
     }
     ?>
+>>>>>>> c47175566179a0055ab45f09e274540850ea10b0
     </ul>
     </div>
     <div class="col-sm-3">
@@ -24,7 +38,7 @@
         ?>
      
         <dir class="navbar-right">
-            <button type="button" class=" btn-link" data-toggle="modal" data-target="#login" >Login</button>| <button type="button" class=" btn-link" data-toggle="modal" data-target="#regist">Regist</button>
+            <button type="button" class=" btn-link" data-toggle="modal" data-target="#login" ><span class="glyphicon glyphicon-log-in"></span> Login</button>| <button type="button" class=" btn-link" data-toggle="modal" data-target="#regist">Regist</button>
         </dir>
       
       <?php
@@ -32,6 +46,11 @@
     else
     {
       ?>
+<<<<<<< HEAD
+        <dir class="navbar-right">
+            <a href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+        </dir>
+=======
         <div class="col-sm-4 navbar-brand">
           <a href="<?php echo $this->baseUrl(); ?>/auth/home"><?php echo $this->user['name'];?></a>
         </div>
@@ -41,6 +60,7 @@
         <div class="col-sm-4">
           <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link">Logout</a>
         </div>
+>>>>>>> c47175566179a0055ab45f09e274540850ea10b0
 
     <?php
     }

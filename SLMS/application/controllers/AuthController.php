@@ -64,9 +64,12 @@ class AuthController extends Zend_Controller_Action
                 }
                 unset($data['confirmPassword']);
 
-                $users->addUser($data);/*
+
+                $users->addUser($data);
+                /*
                 $users->sendConfirmationMail($data);*/
-                
+                var_dump($data);
+                $users->addUser($data);               
                 $this->redirect('/');
             }
         }
