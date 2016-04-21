@@ -21,14 +21,39 @@
           <actionMethod actionName="home"/>
           <actionMethod actionName="logout"/>
         </controllerFile>
+<<<<<<< HEAD
+        <controllerFile controllerName="Category">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Request">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Comment">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Course">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Material">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="User">
+          <actionMethod actionName="index"/>
+=======
         <controllerFile controllerName="Matrial">
           <actionMethod actionName="index"/>
           <actionMethod actionName="add"/>
+>>>>>>> 067397440ab72eb7a1e5c22b26752c4d9bc7e17f
         </controllerFile>
       </controllersDirectory>
       <controllerFile controllerName="Admin">
         <actionMethod actionName="index"/>
         <actionMethod actionName="listUsers"/>
+<<<<<<< HEAD
+        <actionMethod actionName="listCategories"/>
+        <actionMethod actionName="listRequests"/>
+=======
+>>>>>>> 067397440ab72eb7a1e5c22b26752c4d9bc7e17f
       </controllerFile>
       <formsDirectory enabled="false">
         <formFile formName="AddMatrial"/>
@@ -95,11 +120,31 @@
           <viewControllerScriptsDirectory forControllerName="Auth">
             <viewScriptFile forActionName="logout"/>
           </viewControllerScriptsDirectory>
+<<<<<<< HEAD
+          <viewControllerScriptsDirectory forControllerName="Category">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Request">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Comment">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Course">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Material">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="User">
+            <viewScriptFile forActionName="index"/>
+=======
           <viewControllerScriptsDirectory forControllerName="Matrial">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="Matrial">
             <viewScriptFile forActionName="add"/>
+>>>>>>> 067397440ab72eb7a1e5c22b26752c4d9bc7e17f
           </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
@@ -109,6 +154,13 @@
         <viewControllerScriptsDirectory forControllerName="Admin">
           <viewScriptFile forActionName="listUsers"/>
         </viewControllerScriptsDirectory>
+        <viewControllerScriptsDirectory forControllerName="Admin">
+          <viewScriptFile forActionName="listCategories"/>
+        </viewControllerScriptsDirectory>
+        <viewControllerScriptsDirectory forControllerName="Admin">
+          <viewScriptFile forActionName="listRequests"/>
+        </viewControllerScriptsDirectory>
+        
         <viewFiltersDirectory enabled="false"/>
       </viewsDirectory>
       <bootstrapFile filesystemName="Bootstrap.php"/>
