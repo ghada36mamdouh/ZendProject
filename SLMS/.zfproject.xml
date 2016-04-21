@@ -32,6 +32,7 @@
       </controllerFile>
       <formsDirectory enabled="false">
         <formFile formName="AddMatrial"/>
+        <formFile formName="AddComment"/>
       </formsDirectory>
       <layoutsDirectory>
         <layoutScriptsDirectory>

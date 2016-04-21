@@ -4,9 +4,7 @@ class MatrialController extends Zend_Controller_Action
 {
 
     private $model = null;
-
     private $commentModel = null;
-
     private $courseModel = null;
 
     public function init()
@@ -28,6 +26,9 @@ class MatrialController extends Zend_Controller_Action
     	$this->view->course = $this->courseModel->getCourseById($cid) ;
         $this->view->courseMatrial =  $courseMaterials;
         $this->view->materialComments =  $materialComments;
+        $this->view->type = $this->getRequest()->getParam('type');
+        $commentform = new Application_Form_AddComment();
+        $this->view->commentform = $commentform ; 
 
     }
 
@@ -40,11 +41,10 @@ class MatrialController extends Zend_Controller_Action
                 $data = $form->getValues();
                 var_dump($data);
                 $this->model->addMaterial($data);               
-               // $this->redirect('/');
+                //$this->redirect('/');
             }
         }else{
             $cid = $this->getRequest()->getParam('cid');
-            $this->view->cid = $cid ;
             //$form->setValue($value) ;
             $form->setDefault('course_id', $cid)  ;
             $this->view->cname = $this->getRequest()->getParam('cname');
@@ -52,8 +52,6 @@ class MatrialController extends Zend_Controller_Action
         }
 
     }
-
-
 }
 
 
