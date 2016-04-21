@@ -19,6 +19,12 @@ class Application_Model_DbTable_Request extends Zend_Db_Table_Abstract
 		$sql = $this->select()->setIntegrityCheck(false)->where('uid='.$uid);
 		return $this->fetchAll($sql)->toArray();
 	}
+	function listRequestsandUsers(){
+		$select = $this->select()->from('request')->join(array('u'=>'users'),'request.uid = u.id',array('name'))->setIntegrityCheck(FALSE); 
+		$result = $this->fetchAll($select)->toArray();
+		return $result;
+	}
+	
 	function getRequestById($id){
 		return $this->find($id)->toArray();
 	}

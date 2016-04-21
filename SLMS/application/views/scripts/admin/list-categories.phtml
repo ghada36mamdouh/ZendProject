@@ -1,0 +1,58 @@
+<nav class="navbar navbar-inverse">
+  <div class="container-fluid row">
+    <div class="col-sm-9">
+    <ul class="nav navbar-nav">
+       <li>
+        <a href="<?php echo $this->baseUrl(); ?>/Admin">Home</a>
+      </li>
+       <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-users">Users</a></li>
+      <div class="navbar-header active">
+      	<a class="navbar-brand" href="<?php echo $this->baseUrl();?>/Admin/list-categories">Categories</a>
+      </div>
+      <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-requests">Requests</a></li>
+    </ul>
+  </div>
+  <div class="col-sm-1 navbar-brand">
+        <?php echo $this->user['name'];?>
+      </div>
+      <div class="col-sm-1">
+        <img class="navbar-brand" src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->user['photo']; ?>"/>
+      </div>
+      <div class="col-sm-1">
+        <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link">Logout</a>
+      </div>
+    </div>
+</nav>
+<!-- ###############  Body  ################## -->
+<div class="container center">
+	<h1 align="center">All Categories</h1><br />
+	<div class="table table-responsive" >
+		<a href="<?php echo $this->baseUrl(); ?>/Category/add"> Add Category </a>
+		<table class="table table-hover table-bordered">
+		    <thead>
+		      <tr>
+		      	<th>#</th>
+		        <th>name</th>
+		        <th>description</th>
+		        <th>Actions</th>
+		      </tr>
+		    </thead>
+		    <tbody>
+		    	<?php if($this->categories) { 
+					for($i=0; $i<count($this->categories); $i++){ ?>
+		      	<tr>
+			 		<td><?php echo $this->categories[$i]['id']; ?></td>
+			      	<td><?php echo $this->categories[$i]['name']; ?></td>
+			      	<td><?php echo $this->categories[$i]['description']; ?></td>
+			        <td>
+					    <a class="btn btn-success" href="<?php echo $this->baseUrl().'/Category/edit/id/'.$this->categories[$i]['id'] ?>">Edit</a>
+					    <a class="btn btn-danger" href="<?php echo $this->baseUrl().'/Category/delete/id/'.$this->categories[$i]['id'] ?>">Delete</a>
+						<a class="btn btn-warning" href="<?php echo $this->baseUrl().'/Admin/categoryCourses/id/'.$this->categories[$i]['id'] ?>">Courses</a>
+						
+			        </td>
+			    </tr>
+			    <?php }} ?>
+		    </tbody>
+		</table>
+	</div>
+</div>
