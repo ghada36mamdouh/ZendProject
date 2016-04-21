@@ -1,4 +1,7 @@
 <?php
+require_once '../library/Zend/Mail.php';
+require_once '../library/Zend/Mail/Transport/Smtp.php';
+
 
 class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
 {
@@ -11,6 +14,7 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
 		$row->password = md5($data['password']);
 		$row->gender = $data['gender'];
 		$row->country = $data['country'];
+		$row->photo = $data['photo'];
 		return $row->save();
 	}
 	function listUsers(){
@@ -43,6 +47,30 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
             return true;
         }
         return false;
+    }
+
+    function sendConfirmationMail($user)
+    {
+    	 $smtpHost = 'smtp.gmail.com';
+		 $smtpConf = array(
+		  'auth' => 'login',
+		  'ssl' => 'tls',
+		  'port' => '587',
+		  'username' => 'slmsprojectsgz@gmail.com',
+		  'password' => 'sgzSGZ123'
+		 );
+
+
+		 $transport = new Zend_Mail_Transport_Smtp($smtpHost, $smtpConf);
+
+    	    $mail = new Zend_Mail();
+    	    $body="Email : ".$user['email']."\n"."Name : ".$user['name']."\n";
+		    $mail->setBodyText($body);
+		    $mail->setFrom('zienab.abdelnaser@gmail.com', 'zina1');
+		    $mail->setReplyTo('zienab.abdelnaser@gmail.com', 'zina1');
+		    $mail->addTo($user['email'], 'zina2');
+		    $mail->setSubject('Confirmation mail (SLMS)');
+		    $mail->send($transport);
     }
 }
 

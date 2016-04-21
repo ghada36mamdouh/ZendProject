@@ -1,32 +1,136 @@
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid row">
     <div class="col-sm-9">
     <ul class="nav navbar-nav">
-       <div class="navbar-header">
+      <div class="navbar-header active">
         <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>">Home</a>
       </div>
-      <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-users">All Users</a></li>
+      <li><a href="<?php echo $this->baseUrl(); ?>">Courses</a></li>
+      <li><a href="<?php echo $this->baseUrl(); ?>">Users</a></li>
+      <?php 
+        if($this->user['type'] == "admin")
+        {
+          ?>
+      <li><a href="<?php echo $this->baseUrl(); ?>/admin">Admin</a></li>
+      <?php
+    }
+    ?>
     </ul>
     </div>
-    <div class="col-sm-1 navbar-brand">
-    	<a href="<?php echo $this->baseUrl(); ?>/auth/home"><?php echo $this->user['name'];?></a>
-    </div>
-    <div class="col-sm-1">
-    	<img class="navbar-brand" src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->user['photo']; ?>"/>
-    </div>
-    <div class="col-sm-1">
-    	<a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link">Logout</a>
+    <div class="col-sm-3">
+      
+      <?php if(!$this->logged){
+        ?>
+     
+        <dir class="navbar-right">
+            <button type="button" class=" btn-link" data-toggle="modal" data-target="#login" >Login</button>| <button type="button" class=" btn-link" data-toggle="modal" data-target="#regist">Regist</button>
+        </dir>
+      
+      <?php
+    }
+    else
+    {
+      ?>
+        <div class="col-sm-4 navbar-brand">
+          <a href="<?php echo $this->baseUrl(); ?>/auth/home"><?php echo $this->user['name'];?></a>
+        </div>
+        <div class="col-sm-4">
+          <img class="navbar-brand img-circle" src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->user['photo']; ?>"/>
+        </div>
+        <div class="col-sm-4">
+          <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link">Logout</a>
+        </div>
+
+    <?php
+    }
+    ?>
     </div>
   </div>
 </nav>
 
-<div class="text-center">
-  <h3>
-    <code>
-      <?php echo $this->user['name'];?> profile
-    </code>
-  </h3>
+
+
+
+
+
+
+
+
+      <!-- Login Model Part -->
+
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="login" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title"><code>Sign In</code></h3>
+        </div>
+        <div class="modal-body">
+          <?php
+
+                if(isset($this->errorMessage)){
+
+                            echo $this->errorMessage;
+
+                }?>
+
+                <?php
+
+                            echo $this->loginform;
+                ?>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 </div>
+
+    <!-- Login Registration Part -->
+      
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="regist" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title"><code>Sign Up</code></h3>
+        </div>
+        <div class="modal-body">
+                 <?php
+
+                if(isset($this->errorMessage)){
+
+                            echo $this->errorMessage;
+
+                }?>
+
+                <?php
+
+                            echo $this->registform;
+
+                ?>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
+</div>
+
 
 </br>
 </br>
@@ -35,14 +139,14 @@
     <div class="col-sm-1">
     </div>
     <div class="col-sm-3">
-      <img class="navbar-brand" src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->user['photo']; ?>"/>
+      <img class="img-rounded" alt="Cinque Terre" width="250" height="200" src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->user['photo']; ?>"/>
 
     </div>
   </div>
   </br>
   </br>
   <div class="row">
-    <div class="col-sm-1">
+    <div class="col-sm-2">
     </div>
     <div class="col-sm-1">
       <code>
@@ -55,7 +159,7 @@
   </div>
   </br>
   <div class="row">
-    <div class="col-sm-1">
+    <div class="col-sm-2">
     </div>
     <div class="col-sm-1">
       <code>
@@ -69,7 +173,7 @@
     </div>
   </br>
   <div class="row">
-    <div class="col-sm-1">
+    <div class="col-sm-2">
     </div>
     <div class="col-sm-1">
       <code>
@@ -82,7 +186,7 @@
       </div>
   </br>
   <div class="row">
-    <div class="col-sm-1">
+    <div class="col-sm-2">
     </div>
     <div class="col-sm-1">
       <code>
@@ -95,6 +199,45 @@
   </div>
   </div>
 </div>
-<div class="text-center">
-  <a class="btn btn-success" href="<?php echo $this->baseUrl().'/User/edit/id/'.$this->users[$i]['id'] ?>">Edit</a>
+
+<dir class="text-center">
+            <button type="button" class="btn btn-success" data-toggle="modal" data-target="#update" >Edit</button>
+</dir>
+
+    <!-- Login Registration Part -->
+      
+<div class="container">
+  <!-- Modal -->
+  <div class="modal fade" id="update" role="dialog">
+    <div class="modal-dialog">
+    
+      <!-- Modal content-->
+      <div class="modal-content">
+        <div class="modal-header text-center">
+          <button type="button" class="close" data-dismiss="modal">&times;</button>
+          <h3 class="modal-title"><code>Edite Profile</code></h3>
+        </div>
+        <div class="modal-body">
+                 <?php
+
+                if(isset($this->errorMessage)){
+
+                            echo $this->errorMessage;
+
+                }?>
+
+                <?php
+
+                            echo $this->editform;
+
+                ?>
+
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
+        </div>
+      </div>
+      
+    </div>
+  </div>
 </div>
