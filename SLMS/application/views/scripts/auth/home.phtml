@@ -134,70 +134,65 @@
 
 </br>
 </br>
-<div class="text-left">
-  <div class="row">
-    <div class="col-sm-1">
-    </div>
-    <div class="col-sm-3">
-      <img class="img-rounded" alt="Cinque Terre" width="250" height="200" src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->user['photo']; ?>"/>
 
-    </div>
+<div class="row">
+  <div class="col-sm-1">
+    
   </div>
-  </br>
-  </br>
-  <div class="row">
-    <div class="col-sm-2">
-    </div>
-    <div class="col-sm-1">
-      <code>
-        Name :
-      </code>
-    </div>
-    <div class="col-sm-1">
-      <?php echo $this->user['name'];?>
-    </div>
+  <div class="col-sm-3">
+  <img class="img-rounded" alt="Cinque Terre" width="250" height="400" src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->user['photo']; ?>"/>
+  <button class="btn btn-success btn-lg " width='200px'>Change photo</button>
+    
   </div>
-  </br>
-  <div class="row">
-    <div class="col-sm-2">
-    </div>
-    <div class="col-sm-1">
-      <code>
-        Email :
-      </code>
-    </div>
-    <div class="col-sm-1">
-      <?php echo $this->user['email'];?>
-    </div>
+  <div class="col-sm-6">
+    </br>
+    </br>
+    </br>
+        <div class="row">
+              <div class="col-sm-2">
+                <code>
+                  Name :
+                </code>
+              </div>
+              <div class="col-sm-1">
+                <?php echo $this->user['name'];?>
+              </div>
+        </div>
+        </br>
+        <div class="row">
+            <div class="col-sm-2">
+              <code>
+                Email :
+              </code>
+            </div>
+            <div class="col-sm-1">
+              <?php echo $this->user['email'];?>
+            </div>
+        </div>
+        </br>
+        <div class="row">
+            <div class="col-sm-2">
+              <code>
+                Gender :
+              </code>
+            </div>
+            <div class="col-sm-1">
+              <?php echo $this->user['gender'];?>
+            </div>
+        </div>
+        </br>
+        <div class="row">
+            <div class="col-sm-2">
+              <code>
+                Country :
+              </code>
+            </div>
+            <div class="col-sm-1">
+              <?php echo $this->user['country'];?>
+            </div>
+        </div>
   </div>
-    </div>
-  </br>
-  <div class="row">
-    <div class="col-sm-2">
-    </div>
-    <div class="col-sm-1">
-      <code>
-        Gender :
-      </code>
-    </div>
-    <div class="col-sm-1">
-      <?php echo $this->user['gender'];?>
-    </div>
-      </div>
-  </br>
-  <div class="row">
-    <div class="col-sm-2">
-    </div>
-    <div class="col-sm-1">
-      <code>
-        Country :
-      </code>
-    </div>
-    <div class="col-sm-1">
-      <?php echo $this->user['country'];?>
-    </div>
-  </div>
-  </div>
+  
 </div>
 
 <dir class="text-center">

@@ -69,7 +69,8 @@ class Application_Form_Regist extends Zend_Form
 		$photo->setDestination('images');
 		$photo->setRequired(true);
 		$photo->setDescription('Click Browse and click on the photo file you would like to upload');
-		$photo->addValidator('Count', false, 1);               
+		$photo->addValidator('Count', false, 1); 
+		$photo->setAttrib('class','form-control');              
 		$photo->addValidator('Size', false, 10240000);            
 		$photo->addValidator('Extension', false, 'jpg,jpeg,png');
 
