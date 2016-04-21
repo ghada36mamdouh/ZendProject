@@ -17,7 +17,6 @@ class AdminController extends Zend_Controller_Action
        $this->courseModel=new Application_Model_DbTable_Course();
        $this->materialModel=new Application_Model_DbTable_Material();
        $this->commentModel=new Application_Model_DbTable_Comment();
-<<<<<<< HEAD
        $this->requestModel=new Application_Model_DbTable_Request();
 
        $authorization =Zend_Auth::getInstance();
@@ -26,10 +25,7 @@ class AdminController extends Zend_Controller_Action
         }
         $authNamespace = new Zend_Session_Namespace('Zend_Auth');
         $this->view->user=$authNamespace->user;
-       
-=======
-       $this->requestModel=new Application_Model_DbTable_Request();      
->>>>>>> 067397440ab72eb7a1e5c22b26752c4d9bc7e17f
+                   
     }
 
     public function indexAction()
