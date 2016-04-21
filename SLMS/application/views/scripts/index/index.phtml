@@ -7,24 +7,21 @@
         <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>">Home</a>
       </div>
       <li><a href="<?php echo $this->baseUrl(); ?>">Courses</a></li>
-      <li><a href="<?php echo $this->baseUrl(); ?>">Users</a></li>
       <?php 
         if($this->user['type'] == "admin")
         {
-          ?>
-      <li><a href="#">Admin</a></li>
+        ?>
+      <li><a href="<?php echo $this->baseUrl(); ?>/Admin/">AdminPanal</a></li>
       <?php
     }
     ?>
     </ul>
     </div>
     <div class="col-sm-2">
-      
       <?php if(!$this->logged){
-        ?>
-     
-        <dir class="navbar-right">
-            <button type="button" class=" btn-link" data-toggle="modal" data-target="#login" >Login</button>| <button type="button" class=" btn-link" data-toggle="modal" data-target="#regist">Regist</button>
+      ?>
+      <dir class="navbar-right">
+        <button type="button" class=" btn-link" data-toggle="modal" data-target="#login" >Login</button>| <button type="button" class=" btn-link" data-toggle="modal" data-target="#regist">Regist</button>
         </dir>
       
       <?php

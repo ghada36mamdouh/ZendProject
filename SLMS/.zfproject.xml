@@ -21,10 +21,30 @@
           <actionMethod actionName="home"/>
           <actionMethod actionName="logout"/>
         </controllerFile>
+        <controllerFile controllerName="Category">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Request">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Comment">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Course">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="Material">
+          <actionMethod actionName="index"/>
+        </controllerFile>
+        <controllerFile controllerName="User">
+          <actionMethod actionName="index"/>
+        </controllerFile>
       </controllersDirectory>
       <controllerFile controllerName="Admin">
-          <actionMethod actionName="index"/>
-          <actionMethod actionName="listUsers"/>
+        <actionMethod actionName="index"/>
+        <actionMethod actionName="listUsers"/>
+        <actionMethod actionName="listCategories"/>
+        <actionMethod actionName="listRequests"/>
       </controllerFile>
       <formsDirectory enabled="false"/>
       <layoutsDirectory>
@@ -44,21 +64,21 @@
         </dbTableDirectory>
       </modelsDirectory>
       <modelsDirectory>
-      <dbTableDirectory>
-        <dbTableFile dbTableName="Category"/>
-      </dbTableDirectory>
-      <dbTableDirectory>
-        <dbTableFile dbTableName="Course"/>
-      </dbTableDirectory>
-      <dbTableDirectory>
-        <dbTableFile dbTableName="Comment"/>
-      </dbTableDirectory>
-       <dbTableDirectory>
-        <dbTableFile dbTableName="Material"/>
-      </dbTableDirectory>
-      <dbTableDirectory>
-        <dbTableFile dbTableName="Request"/>
-      </dbTableDirectory>
+        <dbTableDirectory>
+          <dbTableFile dbTableName="Category"/>
+        </dbTableDirectory>
+        <dbTableDirectory>
+          <dbTableFile dbTableName="Course"/>
+        </dbTableDirectory>
+        <dbTableDirectory>
+          <dbTableFile dbTableName="Comment"/>
+        </dbTableDirectory>
+        <dbTableDirectory>
+          <dbTableFile dbTableName="Material"/>
+        </dbTableDirectory>
+        <dbTableDirectory>
+          <dbTableFile dbTableName="Request"/>
+        </dbTableDirectory>
       </modelsDirectory>
       <modulesDirectory enabled="false"/>
       <servicesDirectory enabled="false"/>
@@ -88,6 +108,24 @@
           <viewControllerScriptsDirectory forControllerName="Auth">
             <viewScriptFile forActionName="logout"/>
           </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Category">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Request">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Comment">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Course">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="Material">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
+          <viewControllerScriptsDirectory forControllerName="User">
+            <viewScriptFile forActionName="index"/>
+          </viewControllerScriptsDirectory>
         </viewScriptsDirectory>
         <viewHelpersDirectory/>
         <viewControllerScriptsDirectory forControllerName="Admin">
@@ -96,6 +134,13 @@
         <viewControllerScriptsDirectory forControllerName="Admin">
           <viewScriptFile forActionName="listUsers"/>
         </viewControllerScriptsDirectory>
+        <viewControllerScriptsDirectory forControllerName="Admin">
+          <viewScriptFile forActionName="listCategories"/>
+        </viewControllerScriptsDirectory>
+        <viewControllerScriptsDirectory forControllerName="Admin">
+          <viewScriptFile forActionName="listRequests"/>
+        </viewControllerScriptsDirectory>
+        
         <viewFiltersDirectory enabled="false"/>
       </viewsDirectory>
       <bootstrapFile filesystemName="Bootstrap.php"/>
