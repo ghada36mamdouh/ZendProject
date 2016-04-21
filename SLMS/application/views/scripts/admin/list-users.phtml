@@ -1,3 +1,4 @@
+
 <nav class="navbar navbar-inverse">
   <div class="container-fluid row">
     <div class="col-sm-9">
@@ -11,6 +12,19 @@
       <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-categories">Categories</a></li>
       <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-requests">Requests</a></li>
     </ul>
+<<<<<<< HEAD
+=======
+    </div>
+    <div class="col-sm-1 navbar-brand">
+    	<a href="<?php echo $this->baseUrl(); ?>/auth/home"><?php echo $this->user['name'];?></a>
+    </div>
+    <div class="col-sm-1">
+    	<img class="navbar-brand" src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->user['photo']; ?>"/>
+    </div>
+    <div class="col-sm-1">
+    	<a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link">Logout</a>
+    </div>
+>>>>>>> 067397440ab72eb7a1e5c22b26752c4d9bc7e17f
   </div>
   <div class="col-sm-1 navbar-brand">
         <?php echo $this->user['name'];?>
@@ -54,6 +68,19 @@
 					    <a class="btn btn-success" href="<?php echo $this->baseUrl().'/User/edit/id/'.$this->users[$i]['id'] ?>">Edit</a>
 					    <a class="btn btn-danger" href="<?php echo $this->baseUrl().'/User/delete/id/'.$this->users[$i]['id'] ?>">Delete</a>
 						<a class="btn btn-warning" href="<?php echo $this->baseUrl().'/Admin/ban/id/'.$this->users[$i]['id'] ?>">ban</a>
+						<?php
+							if($this->users[$i]['type']=="admin")
+							{
+								?>
+						<a class="btn btn-info" href="<?php echo $this->baseUrl().'/Admin/ban/id/'.$this->users[$i]['id'] ?>">Be Regular</a>
+						<?php
+							}
+							else{
+						?>
+						<a class="btn btn-info" href="<?php echo $this->baseUrl().'/Admin/ban/id/'.$this->users[$i]['id'] ?>">Be admin</a>
+						<?php
+							}
+						?>
 						
 			        </td>
 			    </tr>

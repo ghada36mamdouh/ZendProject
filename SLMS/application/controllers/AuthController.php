@@ -64,8 +64,7 @@ class AuthController extends Zend_Controller_Action
                 }
                 unset($data['confirmPassword']);
                 var_dump($data);
-                $users->addUser($data);
-                
+                $users->addUser($data);               
                 $this->redirect('/');
             }
         }
@@ -74,12 +73,17 @@ class AuthController extends Zend_Controller_Action
     public function homeAction()
     {
         // action body
-        $storage = new Zend_Auth_Storage_Session();
-        $data = $storage->read();
-        if(!$data){
-            $this->_redirect('auth/login');
+        $LoginedUser=Zend_Auth::getInstance();
+        if($LoginedUser->hasIdentity())
+        {
+            $authNamespace = new Zend_Session_Namespace('Zend_Auth');
+            $this->view->user=$authNamespace->user;
+            $this->view->logged=True;
         }
-        $this->view->username = $data->username;
+        else
+        {
+            $this->redirect('/');
+        }
     }
 
     public function logoutAction()

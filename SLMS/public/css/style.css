@@ -12,3 +12,13 @@ select {
     text-indent: 0.01px;
     text-overflow: "";
 }
+
+.actions{
+    float:right ;
+}
+
+/*h1,h2,h3,h4 {
+    text-align: center;
+}
+
+*/

@@ -3,12 +3,25 @@
     <div class="col-sm-9">
     <ul class="nav navbar-nav">
        <div class="navbar-header active">
-        <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>/Admin">Home</a>
+        <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>">Home</a>
       </div>
       <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-users">Users</a></li>
       <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-categories">Categories</a></li>
       <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-requests">Requests</a></li>
     </ul>
+<<<<<<< HEAD
+=======
+    </div>
+    <div class="col-sm-1 navbar-brand">
+    	<a href="<?php echo $this->baseUrl(); ?>/auth/home"><?php echo $this->user['name'];?></a>
+    </div>
+    <div class="col-sm-1">
+    	<img class="navbar-brand" src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->user['photo']; ?>"/>
+    </div>
+    <div class="col-sm-1">
+    	<a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link">Logout</a>
+    </div>
+>>>>>>> 067397440ab72eb7a1e5c22b26752c4d9bc7e17f
   </div>
   <div class="col-sm-1 navbar-brand">
         <?php echo $this->user['name'];?>
