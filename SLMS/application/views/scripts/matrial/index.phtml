@@ -11,7 +11,7 @@
 		$materialComments = $this->materialComments ;
 		$courseMatrial = $this->courseMatrial ;
 		$baseUrl = $this->baseUrl() ;
-		echo '<a href="'.$baseUrl.'/Matrial/add" >Add Matrial</a>'  ;
+		echo '<a href="'.$baseUrl.'/Matrial/add?cid='.$this->course[0]['id'].'&cname='.$this->course[0]['name'].'" >Add Matrial</a>'   ;
 
 		function showMatrail ($type,$courseMatrial,$materialComments,$baseUrl) {
 			echo '<h4>'.$type.'</h4><hr/>' ;
@@ -49,4 +49,7 @@
 		showMatrail ("vedio",$courseMatrial,$materialComments,$baseUrl) ;
 
 	?>  
+
+	
+
 </div>

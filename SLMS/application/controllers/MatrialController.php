@@ -2,9 +2,12 @@
 
 class MatrialController extends Zend_Controller_Action
 {
-	private $model = null  ;
-	private $commentModel = null  ;
-	private $courseModel = null  ;
+
+    private $model = null;
+
+    private $commentModel = null;
+
+    private $courseModel = null;
 
     public function init()
     {
@@ -14,10 +17,9 @@ class MatrialController extends Zend_Controller_Action
         $this->courseModel = new Application_Model_DbTable_Course() ;
     }
 
-    public function indexAction()  
+    public function indexAction()
     {
     	$cid = $this->getRequest()->getParam('cid');
-    	//$this->view->courseMatrial = $mid ;
     	$courseMaterials = $this->model->listCourseMaterials($cid) ;
     	for($i=0 ; $i<count($courseMaterials); $i++){
     			$mid = $courseMaterials[$i]['id'] ;
@@ -29,6 +31,30 @@ class MatrialController extends Zend_Controller_Action
 
     }
 
+    public function addAction()
+    {
+        // action body
+        $form = new Application_Form_AddMatrial();
+        if($this->getRequest()->isPost()){
+            if($form->isValid($_POST)){
+                $data = $form->getValues();
+                var_dump($data);
+                $this->model->addMaterial($data);               
+               // $this->redirect('/');
+            }
+        }else{
+            $cid = $this->getRequest()->getParam('cid');
+            $this->view->cid = $cid ;
+            //$form->setValue($value) ;
+            $form->setDefault('course_id', $cid)  ;
+            $this->view->cname = $this->getRequest()->getParam('cname');
+            $this->view->form = $form ;
+        }
+
+    }
+
 
 }
+
+
 

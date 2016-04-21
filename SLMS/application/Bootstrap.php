@@ -22,6 +22,7 @@ class Bootstrap extends Zend_Application_Bootstrap_Bootstrap
 		// Set the initial JS to load:
 		$view->headScript()->appendFile($view->baseUrl().'/js/jquery-1.12.3.js');
 		$view->headScript()->appendFile($view->baseUrl().'/js/bootstrap.min.js');
+		$view->headScript()->appendFile($view->baseUrl().'/js/code.js');
 	}
 	//To activate session
 	/*protected function _initSession(){
