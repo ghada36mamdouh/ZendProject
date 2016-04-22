@@ -19,10 +19,10 @@ class AdminController extends Zend_Controller_Action
        $this->commentModel=new Application_Model_DbTable_Comment();
        $this->requestModel=new Application_Model_DbTable_Request();
 
-       $authorization =Zend_Auth::getInstance();
+       /*$authorization =Zend_Auth::getInstance();
         if(!$authorization->hasIdentity()) {
             $this->redirect('/');      
-        }
+        }*/
         $authNamespace = new Zend_Session_Namespace('Zend_Auth');
         $this->view->user=$authNamespace->user;
 
