@@ -25,6 +25,8 @@ class AdminController extends Zend_Controller_Action
         }
         $authNamespace = new Zend_Session_Namespace('Zend_Auth');
         $this->view->user=$authNamespace->user;
+
+        $this->view->logged=True;
                    
     }
 
@@ -33,15 +35,35 @@ class AdminController extends Zend_Controller_Action
     }
     public function listUsersAction()
     {
+        $id = $this->getRequest()->getParam('id');
+        if($id)
+            $this->view->id=$id;    
         $this->view->users = $this->userModel->listUsers();
     }
     public function listCategoriesAction()
     {
+        $id = $this->getRequest()->getParam('id');
+        if($id)
+            $this->view->id=$id;  
         $this->view->categories = $this->categoryModel->listCategories();
     }
     public function listRequestsAction()
     {
         $this->view->requests = $this->requestModel->listRequestsandUsers();
+    }
+    public function categoryCoursesAction()
+    {
+        $id = $this->getRequest()->getParam('id');
+        if($id)
+            $this->view->courses = $this->courseModel->listCategoryCourses($id);
+    }
+    public function addUserAction()
+    {
+        $this->view->form = new Application_Form_adduser(); 
+    }
+    public function addCategoryAction()
+    {
+        $this->view->form=new Application_Form_addcategory;
     }
 
 }

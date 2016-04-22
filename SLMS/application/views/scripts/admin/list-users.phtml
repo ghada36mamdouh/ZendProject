@@ -1,16 +1,22 @@
-
 <nav class="navbar navbar-inverse">
   <div class="container-fluid row">
     <div class="col-sm-9">
     <ul class="nav navbar-nav">
-       <li>
-        <a href="<?php echo $this->baseUrl(); ?>/Admin">Home</a>
-      </li>
       <div class="navbar-header active">
-      	<a class="navbar-brand" href="<?php echo $this->baseUrl();?>/Admin/list-users">Users</a>
+        <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>"><span class="glyphicon glyphicon-home"> </span> Home</a>
       </div>
-      <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-categories">Categories</a></li>
-      <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-requests">Requests</a></li>
+      <?php 
+        if($this->user['type'] == "admin")
+        {
+          ?>
+      <li><a href="<?php echo $this->baseUrl(); ?>/auth/home">User</a></li>
+      <?php
+    }
+    ?>
+    <li>
+          <a href="<?php echo $this->baseUrl(); ?>">
+          <span class="glyphicon glyphicon-tasks"> </span> Courses</a>
+    </li>
     </ul>
     </div>
     <div class="col-sm-1 navbar-brand">
@@ -24,55 +30,156 @@
     </div>
   </div>
 </nav>
-<!-- ###############  Body  ################## -->
+    <!-- ###############  end nav  ################## -->
 <div class="container center">
-	<h1 align="center">All Users</h1><br />
-	<div class="table table-responsive" >
-		<a href="<?php echo $this->baseUrl(); ?>/User/add"> Add User </a>
-		<table class="table table-hover table-bordered">
-		    <thead>
-		      <tr>
-		      	<th>photo</th>
-		        <th>name</th>
-		        <th>email</th>
-		        <th>type</th>
-		        <th>gender</th>
-		        <th>country</th>
-		        <th>Actions</th>
-		      </tr>
-		    </thead>
-		    <tbody>
-		    	<?php if($this->users) { 
-					for($i=0; $i<count($this->users); $i++){ ?>
-		      	<tr>
-			      	<td><img src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->users[$i]['photo']; ?>" width="50px" height="50px"/></td>
-			      	<td><?php echo $this->users[$i]['name']; ?></td>
-			      	<td><?php echo $this->users[$i]['email']; ?></td>
-			      	<td><?php echo $this->users[$i]['type']; ?></td>
-			      	<td><?php echo $this->users[$i]['gender']; ?></td>
-			      	<td><?php echo $this->users[$i]['country']; ?></td>
-			        <td>
-					    <a class="btn btn-success" href="<?php echo $this->baseUrl().'/User/edit/id/'.$this->users[$i]['id'] ?>">Edit</a>
-					    <a class="btn btn-danger" href="<?php echo $this->baseUrl().'/User/delete/id/'.$this->users[$i]['id'] ?>">Delete</a>
-						<a class="btn btn-warning" href="<?php echo $this->baseUrl().'/Admin/ban/id/'.$this->users[$i]['id'] ?>">ban</a>
-						<?php
-							if($this->users[$i]['type']=="admin")
-							{
+	<table  cellpadding="100" cellspacing="10" width="100%" height="100%">
+	  <tr>
+	    <td valign="top" color="black">
+	      <br><br><br><br>
+	      <ul class="adminsidebar">
+	        <li class="active"><a href="<?php echo $this->baseUrl();?>/Admin/list-users">Users</a></li>
+	        <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-categories">Categories</a></li>
+	        <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-requests">Requests</a></li>
+	      </ul>
+	    </td>
+	    <td>
+	     <!-- ###############  Body  ################## -->
+			<h1 align="center">All Users</h1><br />
+			<div class="table table-responsive" >
+				<a href="<?php echo $this->baseUrl(); ?>/Admin/add-user"> Add User </a>
+				<table class="table table-hover table-bordered">
+				    <thead>
+				      <tr>
+				      	<th>photo</th>
+				        <th>name</th>
+				        <th>email</th>
+				        <th>type</th>
+				        <th>gender</th>
+				        <th>country</th>
+				        <th>valid</th>
+				        <th>Actions</th>
+				      </tr>
+				    </thead>
+				    <tbody>
+				    	<?php if($this->users) { 
+							for($i=0; $i<count($this->users); $i++){ 
+								if($this->id&&$this->id==$this->users[$i]['id']){
+						?>
+						<tr>
+							<form method="post" action="<?php echo $this->baseUrl(); ?>/User/edit/id/<?php echo $this->users[$i]['id']; ?>">
+					      	<td><img src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->users[$i]['photo']; ?>" width="50px" height="50px"/></td>
+					      	<td>
+					      		<input type="text" name="name" value="<?php echo $this->users[$i]['name']; ?>"/>
+					      	</td>
+					      	<td>
+					      		<input type="email" name="email" value="<?php echo $this->users[$i]['email'];?>" />
+					      	</td>
+					      	<td>
+					      		<select name="type">
+					      		  <?php if($this->users[$i]['type']=="admin"){
+					      		  	echo "<option value='admin' selected>Admin</option>";
+					      		  	echo "<option value='regular'>Regular</option>";
+					      		  }else{
+					      		  	echo "<option value='admin'>Admin</option>";
+					      		  	echo "<option value='regular' selected>Regular</option>";
+					      		  }
+					      		  ?>
+								</select> 
+					      	</td>
+					      	<td>
+					      		<select name="gender">
+					      		  <?php if($this->users[$i]['gender']=="male"){
+					      		  	echo "<option value='male' selected>M</option>";
+					      		  	echo "<option value='female'>F</option>";
+					      		  }else{
+					      		  	echo "<option value='male'>M</option>";
+					      		  	echo "<option value='female' selected>F</option>";
+					      		  }
+					      		  ?>
+								</select> 
+					      	</td>
+					      	<td>
+					      		<select name="country">
+					      		  <?php if($this->users[$i]['country']=="United States"){
+					      		  	echo "<option value='United States' selected>US</option>";
+					      		  	echo "<option value='United Kingdom'>UK</option>";
+					      		  	echo "<option value='Egypt'>EG</option>";
+					      		  }elseif($this->users[$i]['country']=="United Kingdom"){
+					      		  	echo "<option value='United States'>US</option>";
+					      		  	echo "<option value='United Kingdom' selected>UK</option>";
+					      		  	echo "<option value='Egypt'>EG</option>";
+					      		  }else{
+					      		  	echo "<option value='United States'>US</option>";
+					      		  	echo "<option value='United Kingdom'>UK</option>";
+					      		  	echo "<option value='Egypt' selected>EG</option>";
+					      		  }
+					      		  ?>
+								</select>
+					      	</td>
+					      	<td>
+					      		<select name="isvalid">
+					      		  <?php if($this->users[$i]['isvalid']==1){
+					      		  	echo "<option value=1 selected>1</option>";
+					      		  	echo "<option value=0 >0</option>";
+					      		  }else{
+					      		  	echo "<option value=1 >1</option>";
+					      		  	echo "<option value=0 selected>0</option>";
+					      		  }
+					      		  ?>
+								</select> 
+					      	</td>
+					        <td>
+							    <input type="submit" class="btn btn-success" value="Save" />
+							</td>
+							</form>
+						</tr>
+						<?php }else{?>
+				      	<tr>
+					      	<td><img src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->users[$i]['photo']; ?>" width="50px" height="50px"/></td>
+					      	<td><?php echo $this->users[$i]['name']; ?></td>
+					      	<td><?php echo $this->users[$i]['email']; ?></td>
+					      	<td><?php echo $this->users[$i]['type']; ?></td>
+					      	<td><?php echo $this->users[$i]['gender']; ?></td>
+					      	<td><?php echo $this->users[$i]['country']; ?></td>
+					      	<td><?php echo $this->users[$i]['isvalid']; ?></td>
+					        <td>
+							    <a class="btn btn-success" href="<?php echo $this->baseUrl().'/Admin/list-users/id/'.$this->users[$i]['id'] ?>">Edit</a>
+							    <a class="btn btn-danger" href="<?php echo $this->baseUrl().'/User/delete/id/'.$this->users[$i]['id'] ?>">Delete</a>
+							    <?php
+									if($this->users[$i]['isvalid']==1)
+									{
 								?>
-						<a class="btn btn-info" href="<?php echo $this->baseUrl().'/Admin/ban/id/'.$this->users[$i]['id'] ?>">Be Regular</a>
-						<?php
-							}
-							else{
-						?>
-						<a class="btn btn-info" href="<?php echo $this->baseUrl().'/Admin/ban/id/'.$this->users[$i]['id'] ?>">Be admin</a>
-						<?php
-							}
-						?>
-						
-			        </td>
-			    </tr>
-			    <?php }} ?>
-		    </tbody>
-		</table>
-	</div>
+								<a class="btn btn-warning" href="<?php echo $this->baseUrl().'/User/ban/id/'.$this->users[$i]['id'] ?>/validate/1">ban</a>
+								<?php
+									}
+									else
+									{
+								?>
+								<a class="btn btn-warning" href="<?php echo $this->baseUrl().'/User/ban/id/'.$this->users[$i]['id']?>/validate/0">unban</a>
+								<?php
+									}
+									if($this->users[$i]['type']=="admin")
+									{
+								?>
+								<a class="btn btn-info" href="<?php echo $this->baseUrl().'/User/changetype/id/'.$this->users[$i]['id'] ?>/type/regular">Be Regular</a>
+								<?php
+									}
+									else{
+								?>
+								<a class="btn btn-info" href="<?php echo $this->baseUrl().'/User/changetype/id/'.$this->users[$i]['id'] ?>/type/admin">Be admin</a>
+								<?php
+									}
+								?>
+								
+					        </td>
+					    </tr>
+					    <?php }}} ?>
+				    </tbody>
+				</table>
+			</div>
+		
+	 <!-- ###############  end Body  ################## -->
+	    </td>
+	  </tr>
+	</table>
 </div>

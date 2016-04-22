@@ -2,42 +2,82 @@
   <div class="container-fluid row">
     <div class="col-sm-9">
     <ul class="nav navbar-nav">
-       <li>
-        <a href="<?php echo $this->baseUrl(); ?>/Admin">Home</a>
-      </li>
-      <li>
-      	<a href="<?php echo $this->baseUrl();?>/Admin/list-users">Users</a>
-      </li>
-      <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-categories">Categories</a></li>
       <div class="navbar-header active">
-      	<a class="navbar-brand" href="<?php echo $this->baseUrl();?>/Admin/list-requests">Requests</a>
+        <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>"><span class="glyphicon glyphicon-home"> </span> Home</a>
       </div>
+      <?php 
+        if($this->user['type'] == "admin")
+        {
+          ?>
+      <li><a href="<?php echo $this->baseUrl(); ?>/auth/home">User</a></li>
+      <?php
+    }
+    ?>
+    <li>
+          <a href="<?php echo $this->baseUrl(); ?>">
+          <span class="glyphicon glyphicon-tasks"> </span> Courses</a>
+    </li>
     </ul>
-  </div>
-  <div class="col-sm-1 navbar-brand">
-        <?php echo $this->user['name'];?>
-      </div>
-      <div class="col-sm-1">
-        <img class="navbar-brand" src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->user['photo']; ?>"/>
-      </div>
-      <div class="col-sm-1">
-        <a class="navbar-brand" href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link">Logout</a>
-      </div>
     </div>
-  </nav>
-<!-- ###############  Body  ################## -->
-<div class="container center">
-	<h1 align="center">All Requests</h1><br />
-	<?php if($this->requests) { 
-		for($i=0; $i<count($this->requests); $i++){ ?>
-  			<div class="col-sm-4">
-				<div class="panel panel-primary">
-					<div class="panel-heading">there is a request from <?php echo  $this->requests[$i]['name'];?></div>
-				  	<div class="panel-body">
-				  		<?php echo  $this->requests[$i]['body'];?>
-				  	</div>
-				</div>
-			</div>
-    <?php }} ?>
-	</div>
+    <div class="col-sm-3">
+      
+      <?php if(!$this->logged){
+        ?>
+     
+        <dir class="navbar-right">
+            <button type="button" class=" btn-link" data-toggle="modal" data-target="#login" ><span class="glyphicon glyphicon-log-in"></span> Login</button>| <button type="button" class=" btn-link" data-toggle="modal" data-target="#regist">Regist</button>
+        </dir>
+      
+      <?php
+    }
+    else
+    {
+      ?>
+        <dir class="navbar-right">
+            <a href="<?php echo $this->baseUrl(); ?>/auth/logout" type="button" class=" btn-link"><span class="glyphicon glyphicon-log-out"></span> Logout</a>
+        </dir>
+        <div class="col-sm-4 navbar-brand">
+          <a href="<?php echo $this->baseUrl(); ?>/auth/home"><?php echo $this->user['name'];?></a>
+        </div>
+        <div class="col-sm-4">
+          <img class="navbar-brand img-circle" src="<?php echo $this->baseUrl(); ?>/images/<?php echo $this->user['photo']; ?>"/>
+        </div>
+        
+    <?php
+    }
+    ?>
+    </div>
+  </div>
+</nav>
+    <!-- ###############  end nav  ################## -->
+<div class="container">
+  <table cellpadding="10" cellspacing="10" width="100%" height="100%">
+    <tr>
+      <td valign="top" width="15%" color="black">
+        <br><br><br><br>
+        <ul class="adminsidebar">
+          <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-users">Users</a></li>
+          <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-categories">Categories</a></li>
+          <li class="active"><a href="<?php echo $this->baseUrl();?>/Admin/list-requests">Requests</a></li>
+        </ul>
+      </td>
+      <td>
+   <!-- ############### Body  ################## -->
+      	<h1 align="center">All Requests</h1><br />
+      	<?php if($this->requests) { 
+      		for($i=0; $i<count($this->requests); $i++){ ?>
+        			<div class="col-sm-4">
+      				<div class="panel panel-primary">
+      					<div class="panel-heading">there is a request from <?php echo  $this->requests[$i]['name'];?></div>
+      				  	<div class="panel-body">
+      				  		<?php echo  $this->requests[$i]['body'];?>
+      				  	</div>
+      				</div>
+      			</div>
+          <?php }} ?>
+      	</div>
+   <!-- ###############  end Body  ################## -->
+      </td>
+    </tr>
+  </table>
 </div>
