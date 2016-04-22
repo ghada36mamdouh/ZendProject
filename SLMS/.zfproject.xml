@@ -62,6 +62,7 @@
         <formFile formName="Users"/>
         <formFile formName="Login"/>
         <formFile formName="Regist"/>
+        <formFile formName="Request"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>
