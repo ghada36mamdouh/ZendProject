@@ -1,0 +1,236 @@
+
+
+::::::::::::::::::::::::::::::::::::::::::: "nfs"network file system ::::::::::::::::::::::::::::::::::::::::::
+
+TCP :: connection oriented
+UDP :: connectionless
+nfs v3 => UDP ,no authentication ,noport kan byst5dm el [ portMapper ] kan by3ml moshkl m3 el firewall
+nfs v4 => TCP , authentical[kerbos] ,port 2049
+
+nfs server ::
+				$ vi /etc/exports /mydata 192.168.0.0/24(rw) or(ro) => bshyro l ip mo3yn
+				$ systemacl start nfs-server
+				$ exportfs
+				$ showmount -e localhost =>3shan ashof shkl el 7aga elly mshyraha
+nfs client ::
+				$ showmount -e 192.168.0.15 => el nfs server 3amel share l a 
+				$ mkdir /dir1share
+				$ mount 192.168.0.15/dir1 /dir1share =>kda el mount temprary
+				$ touch /dir1share/test => hy2oly permession denied l2ni now "nfsnobody"
+									-mmkn a8yar el owner bta3t el directory 
+									-ady permession 777 bs kda ay 7d hy accessha
+									-mmkn a5ly nfsnobody da acl
+				$ vi /etc/fstab => b5aleh permenant
+				$ mount 192.168.0.15/dir1 /dir1share nfs _netdev 0 0 => a5er 0 mt3mlsh check ll filesystem da 
+$ systemctl stop firewald
+$ setenforce 0
+$ getenforce
+$ systemctl status firewald
+
+
+$ mkdir dir1
+$ touch /dir1/f1 /dir1/f2
+$ systemctl status nfs-server
+$ vi /etc/exports  ==> lma bktb feh el share w el unshare byb2o permenantly 
+	/dir1 193.168.119.128 (rw,no_root_squash) => 3amel el root elly f el client akno el root elly 3la el server
+$ systemacl start nfs-server
+$ systemacl status nfs-server
+
+
+$ showmount -e localhost
+$ showmount -e 192.168.119.128
+$ mkdir /dir1/share
+$ mount 193.168.119.128:/dir1  /dir1share
+$ ls /dir1share
+$ df -h
+$ touch /dir1share/f3 => permession denied
+
+
+$ exportfs
+$ chmod o+w /dir1
+
+
+$ touch /dir1share/f3
+$ ls -l /dire1share
+$ su - iti
+$ touch /dir1share/iti
+$ ls -l /dir1share
+$ cat /etc/passwd
+
+
+$ vi /etc/exports
+$ exportfs -r	
+$ mkdir /dir2
+$ touch /dir2/test /dir2/myfile
+$ exportfs -o rw 192.168.119.128:/dir2 => kda b3ml share temporary
+
+
+$mkdir /dir2share
+$mount 139.168.119.128:/dir2 /dir2share
+$ls -l /dir2share
+
+
+$exportfs -u 139.168.119.128:/dir1 => b3ml unshare l dir1 ll ip da
+$exportfs 
+
+
+::::::::::::::::::::::::::::::::::::::::::: autofs ::::::::::::::::::::::::::::::::::::::::::
+$ mount /dev/sda5 /dir1
+$ df -h
+$ unmount /dir1
+$ cd dir1
+
+fstab => hymount awl ma reboot w hya5od resources mn el system
+autofs => msh hysthlk resources
+at client 
+	$ yum install autofs					
+
+#direct autofs[lazm yb2a mwgod 3la el system , absolutepath]
+					$ vi /etc/auto.master.d/dir1.autofs  
+										- /-	/etc/auto.dir1 
+					$ vi /etc/auto.dir1
+									-/dir1-store  -rw,sync  129.168.128:/dir1  => lazm yb2a absolute pathw mwgoda 3nd el client
+#in-direct autofs[msh lazm yb2a mwgod 3la el system , relativepath]
+					$ vi /etc/auto.master.d/dir2.autofs
+										 /dir2share /etc/auto.dir2
+					$ vi /etc/auto.dir2
+					$ iti -rw,sync 129.168.128:/dir2/iti
+					$ mywork -rw,sync 129.168.128:/dir2/mywork
+					$ * -rw,sync 129.168.128:/dir2/&
+client 
+$ vi /etc/auto.master.d/dir1.autofs 
+			=>/-	/etc/auto.dir1 
+$ vi /etc/auto.dir1 
+			=>/dir1-store  -rw,sync  129.168.128:/dir1
+$ umount /dir2share
+$ cd /dir1share => msh hy3ml auto mount 3shan laxm a start el service
+$ systemctl start autofs
+$ touch /dir1share/asmaa => hy3ml file 3ady
+$ df -h
+Indirect
+$ rmdir /dir2share
+$ vi /etc/auto.master.d/dir2.autofs
+			=>  /dir2share /etc/auto.dir2
+$ vi /etc/auto.dir2
+			=>
+
+::::::::::::::::::::::::::::::::::::::::::: samba::::::::::::::::::::::::::::::::::::::::::::::::
+smb=>sharing
+nmb=> map the server name between linux and windows
+winbind=>authenticate the active directory
+/etc/samba/samb.conf
+
+::server::
+$ mkdir /myshare
+$ touch /myshare/f1 /myshare/f2
+$ yum install samba
+$ vi /etc/samba/samb.conf
+					 workgroup=> el network elly 2na tb3ha
+ 					server string => y klam
+ 					netbios name => htshaf b esm a
+ 					security => user,server,
+ 					local master =>yes
+ 					os level => 70
+ 					prefered master => yes
+			[myshare]
+			comment= my first share
+			path =/myshare
+			public=yes
+			writable=yes
+
+$ man smb.conf
+$ systemctl stop firewalld
+$ setenforce 0
+$  systemctl restart smb
+$  systemctl restart nmb
+
+//client
+$ smbclient -L 192.168.100.10 => hy2ol command not found 
+$ yum provides */smbclient
+$ yum install samba-client
+$ smbclient -L 192.168.100.10
+$ smbclient  \\\\192.168.100.10\\myshare
+smb > mkdir test 
+smb > ls
+smb > exit
+
+//server
+$ chmod o_w  /myshare
+$ 
+$ 
+
+::client::
+$ useradd ali
+$ su ali
+$ smbclient \\\\192.168.100.10\\myshare
+$ mkdir ay7aga 
+$ vi /etc/samba/smb.conf
+		guest account = iti
+
+$ smbpassswd -a iti => zwd 3ndk el user da byd5l username w passwd yd5lhom lma y3ml share
+$ smbclient  -U iti \\\\192.168.100.10\\myshare => hytlob password iti 
+smb > mkdir ititest 
+smb > ls -l /ititest
+smb > exit
+$ vi /etc/samba/samb.conf
+		valid users = ali , asmaa, reham
+$  systemctl restart smb
+$  systemctl restart nmb
+$ smbpassswd -a ali 
+$ smbclient  -U ali \\\\192.168.100.10\\myshare
+$ mkdir /ali 
+$ mount -o  username=ali,password=ali //192.168.100.10/myshare  /mnt
+$ df -h => kda b2a shared
+$ mkdir /secure 
+$ vi /secure/ali
+	username= ali
+	password= iti
+$ chmod 600 /secure/ali
+$ unmount /mnt
+$ df -h
+$ mount -t cifs -o credentials=/secure/ali
+	//192.168.100.10/myshare  /mnt cifs _netdev,username=ali, password=iti 0 0 ==> in the fstabfile
+
+//for auto mount
+$yum install automount
+$ vi /etc/auto.master.d/myshare/autofs
+			/mount/etc/auto.myshare
+$ vi /etc/automyshare
+	-fstype=cifs , username=ali, password=iti ://192.168.100.10/myshare/&
+
+
+::::::::::::::::::::::::::::::::::::::::::: dhcp server ::::::::::::::::::::::::::::::::::::::::::
+Dynamic host configuration protocol[ip-subnet -router-dns-domain]
+$yum install dhcp
+DORA :: proccess discovery message  on 255.255.25.255
+		dhcp=>offer
+		machine=>request
+		dhcp=>achnoledgement
+$cp /usr/share/doc/dhcp-4.2.5/dhcpd.conf.example /etc/dhcp/dhcpd.conf
+$ vi /etc/dhcp/dhcpd.conf
+::global configuration :: y3ni mmkn awz3 3la aktr mn network
+			-domain-name "iti.com"
+			-domain-name-servers 8.8.8.8 ,8.8.4.4
+			-nshel el subnets el mwgoda w n5ly w7da hn3dl feha
+
+			subnet 192.168.100.0 netmask 255.255.255.0{
+			range 192.186.100.100 192.168.100.150;
+			option domain-name-servers 192.168.100.2, 8.8.8.8;
+			option routers 192.168.100.2;
+			}
+$ systemctl start dhcpd
+$ pkill -9 dhclient
+$ dhclient -v eno16777736 => hna bashof el dora process
+$ ip addr show 
+$ 00:0c:29:d6
+$ vi /etc/dhcp/dhcpd.conf
+			host client{
+			hardware ethernet 00:0c:29:d6:3c:68;
+			fixed.........
+			}
+$ systemacl restart dhcpd
+$ 
+$ 
+$  
+
+::::::::::::::::::::::::::::::::::::::::::: "nfs"network file system ::::::::::::::::::::::::::::::::::::::::::
