@@ -15,21 +15,27 @@ class Application_Form_Regist extends Zend_Form
         $name->setLabel('Name:');
         $name->setAttrib('class','form-control');
         $name->setRequired(false);
+        $name->setAttrib('placeholder',"Enter name");
         
         $email = new Zend_Form_Element_Text('email');
         $email->setLabel('Email: *');
         $email->setAttrib('class','form-control');
-        $email->setRequired(false);
+        $email->setAttrib('type','email');
+        $email->setAttrib('placeholder',"Enter email");
+        $email->setRequired(false); 
+		$email->addValidator('EmailAddress');
                 
         $password = new Zend_Form_Element_Password('password');
         $password->setLabel('Password: *');
         $password->setAttrib('class','form-control');
         $password->setRequired(true);
+        $password->setAttrib('placeholder',"Enter password");
                 
         $confirmPassword = new Zend_Form_Element_Password('confirmPassword');
         $confirmPassword->setLabel('Confirm Password: *');
         $confirmPassword->setAttrib('class','form-control');
         $confirmPassword->setRequired(true);
+        $confirmPassword->setAttrib('placeholder',"Confirm password");
 
         $gender = new Zend_Form_Element_Radio('gender');
         $gender->setLabel('Gender :');
@@ -57,7 +63,21 @@ class Application_Form_Regist extends Zend_Form
         $register = new Zend_Form_Element_Submit('Register');
         $register->setLabel('Sign up');
         $register->setAttrib('class','btn-primary btn form-control');
-                
+        
+        $photo = new Zend_Form_Element_File('photo');
+		$photo->setLabel('Upload an photo:');
+		$photo->setDestination('images');
+		$photo->setRequired(true);
+		$photo->addValidator('Count', false, 1);               
+		$photo->addValidator('Size', false, 10240000);            
+		$photo->addValidator('Extension', false, 'jpg,jpeg,png');
+
+		$signature = new Zend_Form_Element_Text('signature');
+        $signature->setLabel('Signature :');
+        $signature->setAttrib('class','form-control');
+        $signature->setRequired(false);
+        $signature->setAttrib('placeholder',"Enter signature");
+
         $this->addElements(array(
                         $name,
                         $email,
@@ -65,6 +85,8 @@ class Application_Form_Regist extends Zend_Form
                         $confirmPassword,
                         $gender,
                         $country,
+                        $photo,
+                        $signature,
                         $register,
         ));
     }

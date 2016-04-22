@@ -15,11 +15,15 @@ class Application_Form_Login extends Zend_Form
         $email->setLabel('Email: *');
         $email->setRequired(true);
         $email->setAttrib('class','form-control');
+        $email->setAttrib('type','email');
+        $email->setAttrib('placeholder',"Enter email");
+        $email->addValidator('EmailAddress');
                 
         $password = new Zend_Form_Element_Password('password');
         $password->setLabel('Password: *');
         $password->setRequired(true);
         $password->setAttrib('class','form-control');
+        $password->setAttrib('placeholder',"Enter password");
                 
         $signin = new Zend_Form_Element_Submit('Login');
         $signin->setLabel('Sign in');														
