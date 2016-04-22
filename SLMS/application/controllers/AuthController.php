@@ -64,13 +64,7 @@ class AuthController extends Zend_Controller_Action
                     return;
                 }
                 unset($data['confirmPassword']);
-
-
                 $users->addUser($data);
-                /*
-                $users->sendConfirmationMail($data);*/
-                var_dump($data);
-                $users->addUser($data);               
                 $this->redirect('/');
             }
         }
@@ -169,7 +163,6 @@ class AuthController extends Zend_Controller_Action
     {
         $users = new Application_Model_DbTable_User();
         $form = new Application_Form_Regist();
-        $form = new Application_Form_Regist();
         $form->removeElement('password');
         $form->removeElement('confirmPassword');
         $form->removeElement('gender');
@@ -192,7 +185,6 @@ class AuthController extends Zend_Controller_Action
                 /// Update user into session 
 
                 $loginedUser=$users->getUserByEmail($authNamespace->user['email']);
-                $authNamespace = new Zend_Session_Namespace('Zend_Auth');
                 $authNamespace->user = $loginedUser;
                 $this->redirect('/auth/home');
             }

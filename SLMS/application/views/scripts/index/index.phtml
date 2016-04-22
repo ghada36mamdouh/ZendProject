@@ -50,10 +50,41 @@
   </div>
 </nav>
 
+</br>
+</br>
+</br>
+</br>
+<?php if($this->logged){
+        ?>
+<div class="row">
+  <div class="col-sm-1">
+  
+  </div>
+  <div class="col-sm-4">
+    <h3>
+      <code>
+        Send Your matrial request 
+      </code>
+    </h3>
+  </div>
+</div>
+</br>
+</br>
+<div class="text-left row">
+<div class="col-sm-1">
+  
+</div>
+<div class="col-sm-4">
+  <?php
+  echo $this->requestform;
+  ?>
+</div>
+  
+</div>
 
 
-
-
+<?php }
+        ?>
 
 
 

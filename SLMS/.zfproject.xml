@@ -21,7 +21,6 @@
           <actionMethod actionName="home"/>
           <actionMethod actionName="logout"/>
         </controllerFile>
-<<<<<<< HEAD
         <controllerFile controllerName="Category">
           <actionMethod actionName="index"/>
         </controllerFile>
@@ -44,11 +43,8 @@
       <controllerFile controllerName="Admin">
         <actionMethod actionName="index"/>
         <actionMethod actionName="listUsers"/>
-<<<<<<< HEAD
         <actionMethod actionName="listCategories"/>
         <actionMethod actionName="listRequests"/>
-=======
->>>>>>> 067397440ab72eb7a1e5c22b26752c4d9bc7e17f
       </controllerFile>
       <formsDirectory enabled="false">
         <formFile formName="AddMatrial"/>
@@ -63,6 +59,7 @@
         <formFile formName="Users"/>
         <formFile formName="Login"/>
         <formFile formName="Regist"/>
+        <formFile formName="Request"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>
@@ -112,7 +109,6 @@
           <viewControllerScriptsDirectory forControllerName="Auth">
             <viewScriptFile forActionName="logout"/>
           </viewControllerScriptsDirectory>
-<<<<<<< HEAD
           <viewControllerScriptsDirectory forControllerName="Category">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
@@ -127,7 +123,6 @@
           </viewControllerScriptsDirectory>
           <viewControllerScriptsDirectory forControllerName="User">
             <viewScriptFile forActionName="index"/>
-=======
           <viewControllerScriptsDirectory forControllerName="Matrial">
             <viewScriptFile forActionName="index"/>
           </viewControllerScriptsDirectory>
@@ -148,7 +143,6 @@
         <viewControllerScriptsDirectory forControllerName="Admin">
           <viewScriptFile forActionName="listRequests"/>
         </viewControllerScriptsDirectory>
-        
         <viewFiltersDirectory enabled="false"/>
       </viewsDirectory>
       <bootstrapFile filesystemName="Bootstrap.php"/>

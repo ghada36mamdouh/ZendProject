@@ -14,7 +14,7 @@ class Application_Form_Regist extends Zend_Form
         $name = new Zend_Form_Element_Text('name');
         $name->setLabel('Name:');
         $name->setAttrib('class','form-control');
-        $name->setRequired(false);
+        $name->setRequired(true);
         $name->setAttrib('placeholder',"Enter name");
         
         $email = new Zend_Form_Element_Text('email');
@@ -22,7 +22,7 @@ class Application_Form_Regist extends Zend_Form
         $email->setAttrib('class','form-control');
         $email->setAttrib('type','email');
         $email->setAttrib('placeholder',"Enter email");
-        $email->setRequired(false); 
+        $email->setRequired(true); 
 		$email->addValidator('EmailAddress');
                 
         $password = new Zend_Form_Element_Password('password');
