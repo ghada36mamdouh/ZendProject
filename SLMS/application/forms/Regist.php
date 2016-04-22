@@ -68,11 +68,15 @@ class Application_Form_Regist extends Zend_Form
 		$photo->setLabel('Upload an photo:');
 		$photo->setDestination('images');
 		$photo->setRequired(true);
-		$photo->setDescription('Click Browse and click on the photo file you would like to upload');
-		$photo->addValidator('Count', false, 1); 
-		$photo->setAttrib('class','form-control');              
+		$photo->addValidator('Count', false, 1);               
 		$photo->addValidator('Size', false, 10240000);            
 		$photo->addValidator('Extension', false, 'jpg,jpeg,png');
+
+		$signature = new Zend_Form_Element_Text('signature');
+        $signature->setLabel('Signature :');
+        $signature->setAttrib('class','form-control');
+        $signature->setRequired(false);
+        $signature->setAttrib('placeholder',"Enter signature");
 
         $this->addElements(array(
                         $name,
@@ -82,6 +86,7 @@ class Application_Form_Regist extends Zend_Form
                         $gender,
                         $country,
                         $photo,
+                        $signature,
                         $register,
         ));
     }
