@@ -5,9 +5,9 @@
 		echo "<h3>".$this->course[0]['name']." Course</h3><br><br>";
 		//var_dump($this->course) ;
 		//var_dump($this->courseMatrial) ;
-
 		$materialComments = $this->materialComments ;
 		$courseMatrial = $this->courseMatrial ;
+		$cid = $this->course[0]['id'] ;
 		$baseUrl = $this->baseUrl() ;
 		$baseUrl = $this->baseUrl() ;
 
@@ -18,14 +18,15 @@
 		echo '<a href="'.$baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=pdf"><li >PDF</li></a>';
 		echo '<a href="'.$baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=doc"><li>doc</li></a>';
 		echo '<a href="'.$baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=ppt"><li>ppt</li></a>';
-		echo '<a href="'.$baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=vedio"><li>vedio</li></a>' ;
+		echo '<a href="'.$baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=zip"><li>zip</li></a>';
+		echo '<a href="'.$baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=mp4"><li>vedio</li></a>' ;
 		echo '</ul></div>' ;
 		echo '<div class="content col-sm-8">';
 
-		function showMatrail ($type,$courseMatrial,$materialComments,$baseUrl,$commentform) {
+		function showMatrail ($type,$courseMatrial,$materialComments,$baseUrl,$commentform,$cid) {
 
 			echo '<h4>'.$type.'</h4><hr/>' ;
-			for($i=0 ; $i<count($courseMatrial); $i++){
+			for($i=count($courseMatrial)-1 ; $i>=0; $i--){
 				if($courseMatrial[$i]['type'] == $type){
 					//echo '<img src="'.$this->baseUrl().'images/icons/pdf.ico"/>' ;
 					$mid = $courseMatrial[$i]['id'] ;
@@ -34,7 +35,7 @@
 					echo '<div class="panel-heading">'.$courseMatrial[$i]['path'];
 					echo '<div class="actions"><a href="'.$baseUrl.'/Matrial/edit/id/'.$mid.'"><span class="glyphicon glyphicon-edit"><span>Edit </a>&nbsp;&nbsp;';
 
-					echo '<a href="'.$baseUrl.'/Matrial/delete/id/'.$mid.'"><span class="glyphicon glyphicon-trash" ></span>Delete </a>&nbsp;&nbsp;';
+					echo '<a href="'.$baseUrl.'/Matrial/delete?mid='.$mid.'&type='.$type.'&cid='.$cid.'"><span class="glyphicon glyphicon-trash" ></span>Delete </a>&nbsp;&nbsp;';
 
 					if($courseMatrial[$i]['enabledownload']){
 						echo '<a href="'.$baseUrl.'/Matrial/lock/id/'.$mid.'"><span class="glyphicon glyphicon-lock"><span>lock </a>&nbsp;&nbsp;' ;						
@@ -45,25 +46,29 @@
 						echo '<a href="'.$baseUrl.'/Matrial/visible/id/'.$mid.'"><span class="glyphicon glyphicon-eye-close"><span>hide </a>&nbsp; &nbsp;' ;
 					}else{
 						echo '<a href="'.$baseUrl.'/Matrial/visible/id/'.$mid.'"><span class="glyphicon glyphicon-eye-open"><span>show</a>&nbsp; &nbsp;' ;
-					}					
-					echo '</div></div>';
+					}
+					echo "</div>";	
+					echo '<br/><br/>Description : '.$courseMatrial[$i]['description'];				
+					echo '</div>';
 					echo '<div class="panel-body">' ;
 					for($j=0 ; $j<count($materialComments[$mid]); $j++){
 						echo '<div class="well well-sm" style="background-color:;">';
-						echo '<div class="actions"><a href=""><span class="glyphicon glyphicon-edit"> <span></a><a href=""> <span  class="glyphicon glyphicon-trash" ><span></a></div>';
+						echo '<div class="actions">';
+						echo '<a href=""><span class="glyphicon glyphicon-edit"> <span></a>';
+						echo '<a href="'.$baseUrl.'/Comment/delete?type='.$type.'&cid='.$cid.'&comid='.$materialComments[$mid][$j]['id'].'">' ;
+						echo '<span  class="glyphicon glyphicon-trash" ><span></a></div>';
 						echo '<div>'.$materialComments[$mid][$j]['body'].'</div>' ;
 						echo '</div>' ;
 					}
-					echo '<form action="" method="post"><div class="col-sm-11"><input type="text"  class="form-control" /></div><input type="submit" class="btn" value="add" ></form>'  ;
+					echo '<form action="'.$baseUrl.'/Comment/add?mid='.$mid.'&cid='.$cid.'&type='.$type.'" method="post">';
+					echo '<div class="col-sm-11"><input type="text" name="commentbody" require class="form-control" /></div><input type="submit" class="btn" value="add" ></form>';
 					//echo $commentform ;
 					echo '</div></div>';
 				}			
 			}
 			echo '<hr/>' ;
 		}
-		showMatrail ($this->type,$courseMatrial,$materialComments,$baseUrl,$this->commentform) ;
-		// showMatrail ("word",$courseMatrial,$materialComments,$baseUrl) ;
-		// showMatrail ("vedio",$courseMatrial,$materialComments,$baseUrl) ;
+		showMatrail ($this->type,$courseMatrial,$materialComments,$baseUrl,$this->commentform,$cid) ;
 		echo '</div>' ;
 	?> 
 </div>

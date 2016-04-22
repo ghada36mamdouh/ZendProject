@@ -37,5 +37,8 @@ class Application_Model_DbTable_Comment extends Zend_Db_Table_Abstract
 	function deleteComments($id){
 		return $this->delete('id='.$id);
 	}
+	function deleteMaterialComments($id){
+		return $this->delete('mid='.$id);
+	}
 
 }
