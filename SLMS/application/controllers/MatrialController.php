@@ -89,20 +89,18 @@ class MatrialController extends Zend_Controller_Action
         $cid = $this->getRequest()->getParam('cid');     
         $type = $this->getRequest()->getParam('type');
         $data = array('isshow' => $v) ;
-        $this->view->data1 = $data ;
-        // $this->view->mid = $mid ;
-        // $this->view->cid = $cid ;
-        // $this->view->type = $type ;
-
-        if($this->model->editMaterial($mid,$data)){
-                $this->view->data = $this->model->editMaterial($mid,$data);
-                $this->view->test = "update";
-        }else{
-                $this->view->test = "not update"; 
-        }
- 
-
-       // $this->redirect('/Matrial?cid='.$cid.'&type='.$type);            
+        $this->model->editMaterial($mid,$data) ;
+        $this->redirect('/Matrial?cid='.$cid.'&type='.$type);            
+    }
+    public function lockAction()
+    {                             
+        $l = $this->getRequest()->getParam('l');     
+        $mid = $this->getRequest()->getParam('mid');     
+        $cid = $this->getRequest()->getParam('cid');     
+        $type = $this->getRequest()->getParam('type');
+        $data = array('enabledownload' => $l) ;
+        $this->model->editMaterial($mid,$data) ;
+        $this->redirect('/Matrial?cid='.$cid.'&type='.$type);            
     }
 }
 

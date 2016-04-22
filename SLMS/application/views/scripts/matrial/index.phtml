@@ -48,14 +48,14 @@
 								&nbsp;&nbsp;
 								<?php 
 								if($courseMatrial[$i]['enabledownload']){
-									echo '<a href="'.$baseUrl.'/Matrial/lock/id/'.$mid.'"><span class="glyphicon glyphicon-lock"><span>lock </a>&nbsp;&nbsp;' ;						
+									echo '<a href="'.$baseUrl.'/Matrial/lock?l=0&type='.$type.'&cid='.$cid.'&mid='.$mid.'"><span class="glyphicon glyphicon-lock"><span>lock </a>&nbsp;&nbsp;' ;						
 								}else{
-									echo '<a href="'.$baseUrl.'/Matrial/lock/id/'.$mid.'">Unlock </a>&nbsp;&nbsp;' ;
-								}					
+									echo '<a href="'.$baseUrl.'/Matrial/lock?l=1&type='.$type.'&cid='.$cid.'&mid='.$mid.'">Unlock </a>&nbsp;&nbsp;' ;
+								}				
 								if($courseMatrial[$i]['isshow']){
 									echo '<a href="'.$baseUrl.'/Matrial/visible?v=0&type='.$type.'&cid='.$cid.'&mid='.$mid.'"><span class="glyphicon glyphicon-eye-close"><span>hide </a>&nbsp; &nbsp;' ;
 								}else{
-									echo '<a href="'.$baseUrl.'/Matrial/visible?v=1&type='.$type.'&cid='.$cid.'"><span class="glyphicon glyphicon-eye-open"><span>show</a>&nbsp; &nbsp;' ;
+									echo '<a href="'.$baseUrl.'/Matrial/visible?v=1&type='.$type.'&cid='.$cid.'&mid='.$mid.'"><span class="glyphicon glyphicon-eye-open"><span>show</a>&nbsp; &nbsp;' ;
 								}
 								?>
 							</div>	

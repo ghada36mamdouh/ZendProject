@@ -29,8 +29,7 @@ class Application_Form_AddMatrial extends Zend_Form
 
         $type = new Zend_Form_Element_Hidden('type');
         $course_id = new Zend_Form_Element_Hidden('course_id');
-
-                
+               
         $add = new Zend_Form_Element_Submit('add');
         $add->setLabel('add');														
         $add->setAttrib('class','btn-primary btn form-control');

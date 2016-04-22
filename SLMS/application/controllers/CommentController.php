@@ -34,8 +34,9 @@ class CommentController extends Zend_Controller_Action
            			//$data['uid'] = $this->user['id'] ;  
            			$data['uid'] = 1 ; //check 
            	        $this->model->addComment($data);
+                    //$this->view->addcommentform = $data ;
            	 }
-        }    	
+        }  
         $this->redirect('/Matrial?cid='.$cid.'&type='.$type) ;
     }
     public function deleteAction()

@@ -28,8 +28,9 @@ class Application_Model_DbTable_Material extends Zend_Db_Table_Abstract
 	}
 
 	function editMaterial($id, $data){
-		$where = $this->getAdapter()->quoteInto('id = ?', $id);
-		$this->update($data, $where);
+		//$where = $this->getAdapter()->quoteInto('id = ?', $id);
+		$where = 'id ='.$id ;
+		return $this->update($data, $where);
 	}
 	function deleteMaterial($id){
 		return $this->delete('id='.$id);
