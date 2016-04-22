@@ -94,7 +94,7 @@ class AuthController extends Zend_Controller_Action
             $form->removeElement('confirmPassword');
             $form->removeElement('gender');
             $form->removeElement('photo');
-            $form->populate($user[0]);
+            $for->populate($user[0]);
 
             $URL="updateprofile";
             $form->setAction($URL);
