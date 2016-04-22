@@ -82,7 +82,31 @@ class MatrialController extends Zend_Controller_Action
     
         $this->redirect('/Matrial?cid='.$cid.'&type='.$type);            
     }
+    public function visibleAction()
+    {                             
+        $v = $this->getRequest()->getParam('v');     
+        $mid = $this->getRequest()->getParam('mid');     
+        $cid = $this->getRequest()->getParam('cid');     
+        $type = $this->getRequest()->getParam('type');
+        $data = array('isshow' => $v) ;
+        $this->view->data1 = $data ;
+        // $this->view->mid = $mid ;
+        // $this->view->cid = $cid ;
+        // $this->view->type = $type ;
+
+        if($this->model->editMaterial($mid,$data)){
+                $this->view->data = $this->model->editMaterial($mid,$data);
+                $this->view->test = "update";
+        }else{
+                $this->view->test = "not update"; 
+        }
+ 
+
+       // $this->redirect('/Matrial?cid='.$cid.'&type='.$type);            
+    }
 }
+
+
 
 
 
