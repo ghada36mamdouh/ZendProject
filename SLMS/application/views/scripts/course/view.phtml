@@ -9,7 +9,7 @@
         if($this->user['type'] == "admin")
         {
           ?>
-      <li><a href="<?php echo $this->baseUrl(); ?>/Admin">Admin</a></li>
+      <li><a href="<?php echo $this->baseUrl(); ?>/admin">Admin</a></li>
       <?php
     }
     ?>
@@ -66,42 +66,73 @@
 </br>
 </br>
 </br>
-<?php if($this->logged){
-        ?>
-<div class="row">
-  <div class="col-sm-1">
-  
+
+<!-- Booooody Html   -->
+<div class="text-center">
+  <div class="row">
+    <div class="col-sm-1">
+      
+    </div>
+    <div class="col-sm-3">
+      <div class="row">
+          <a href="<?php echo $this->baseUrl(); ?>/Matrial/list/?cid=<?php echo $this->course['id']; ?>&type=pdf "><img src="<?php echo $this->baseUrl(); ?>/images/PDF.jpeg" width="150" height="150"></a>
+      </div>
+      </br>
+      <div>
+          <a href="<?php echo $this->baseUrl(); ?>/Matrial/list/?cid=<?php echo $this->course['id']; ?>&type=pdf ">PDF</a>
+      </div>
+    </div>
+
+    <div class="col-sm-3">
+      <div class="row">
+          <a href="<?php echo $this->baseUrl(); ?>/Matrial/list/?cid=<?php echo $this->course['id']; ?>&type=doc "><img src="<?php echo $this->baseUrl(); ?>/images/DOC.png" width="150" height="150"></a>
+      </div>
+      </br>
+      <div>
+          <a href="<?php echo $this->baseUrl(); ?>/Matrial/list/?cid=<?php echo $this->course['id']; ?>&type=doc ">DOC</a>
+      </div>
+    </div>
+
+    <div class="col-sm-3">
+        <div class="row">
+            <a href="<?php echo $this->baseUrl(); ?>/Matrial/list/?cid=<?php echo $this->course['id']; ?>&type=ppt "><img src="<?php echo $this->baseUrl(); ?>/images/PPT.png" width="150" height="150"></a>
+        </div>
+        </br>
+        <div>
+            <a href="<?php echo $this->baseUrl(); ?>/Matrial/list/?cid=<?php echo $this->course['id']; ?>&type=ppt ">PPT</a>
+        </div>
+    </div>
   </div>
-  <div class="col-sm-4">
-    <h3>
-      <code>
-        Send Your matrial request 
-      </code>
-    </h3>
+</br>
+  <div>
+    <div class="col-sm-1">
+        
+    </div>
+    <div class="col-sm-3">
+      <div class="row">
+          <a href="<?php echo $this->baseUrl(); ?>/Matrial/list/?cid=<?php echo $this->course['id']; ?>&type=zip "><img src="<?php echo $this->baseUrl(); ?>/images/ZIP.png" width="150" height="150"></a>
+      </div>
+      </br>
+      </br>
+      <div>
+          <a href="<?php echo $this->baseUrl(); ?>/Matrial/list/?cid=<?php echo $this->course['id']; ?>&type=zip ">ZIP</a>
+      </div>
+    </div>
+  
+        <div class="col-sm-3">
+          <div class="row">
+              <a href="<?php echo $this->baseUrl(); ?>/Matrial/list/?cid=<?php echo $this->course['id']; ?>&type=mp4 "><img src="<?php echo $this->baseUrl(); ?>/images/MP4.png" width="150" height="150"></a>
+          </div>
+          </br>
+          <div>
+              <a href="<?php echo $this->baseUrl(); ?>/Matrial/list/?cid=<?php echo $this->course['id']; ?>&type=mp4 ">Video</a>
+          </div>
+        </div>
+
   </div>
-</div>
-</br>
-</br>
-<div class="text-left row">
-<div class="col-sm-1">
   
-</div>
-<div class="col-sm-4">
-  <?php
-  echo $this->requestform;
-  ?>
-</div>
-  
-</div>
 
-
-<?php }
-        ?>
-
-
-
-
-      <!-- Login Model Part -->
+<!-- Login Model Part -->
 
 <div class="container">
   <!-- Modal -->

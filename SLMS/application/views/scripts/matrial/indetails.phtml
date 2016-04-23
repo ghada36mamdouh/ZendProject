@@ -9,7 +9,7 @@
         if($this->user['type'] == "admin")
         {
           ?>
-      <li><a href="<?php echo $this->baseUrl(); ?>/Admin">Admin</a></li>
+      <li><a href="<?php echo $this->baseUrl(); ?>/admin">Admin</a></li>
       <?php
     }
     ?>
@@ -65,43 +65,69 @@
 </br>
 </br>
 </br>
-</br>
-<?php if($this->logged){
-        ?>
+
+<!-- Booooody Html   -->
+<?php if($this->logged) {?>
 <div class="row">
-  <div class="col-sm-1">
-  
+  <div class="col-sm-2"></div>
+  <div class="col-sm-8">
+
+    <div class="panel panel-primary">
+      <div class="panel-heading">
+        <div class="text-center">
+                  <b><?php echo $this->materials['description'] ;?></b>
+
+        </div>
+      </div>
+
+      <div class="panel-body">
+        <table class="table">
+        <?php
+              foreach ($this->comments as $comment) {
+              ?>
+              <tr>
+                <td><b><?php echo $comment['body'] ?></b></td>
+                <td></td>
+                <td></td>
+                <td></td>
+                <?php if($comment['uid'] == $this->user['id']) {?>
+                  <td>
+                      <a href="<?php echo $this->baseUrl(); ?>/comment/del/?cmid=<?php echo $comment['id'] ;?>&mid=<?php echo $this->materials['id'] ;?>&type=<?php echo $this->materials['type'] ;?>">
+                        <span class="glyphicon glyphicon-edit"><span>Edit 
+                      </a>
+                      <a href="<?php echo $this->baseUrl(); ?>/comment/del/?cmid=<?php echo $comment['id'];?>&mid=<?php echo $this->materials['id'];?>&type=<?php echo $this->materials['type'];?>">
+                        <span class="glyphicon glyphicon-trash" ></span>Delete 
+                      </a>
+                  </td>
+                <?php } 
+                  else {?>
+                  <td></td>
+                  <?php }?>
+                
+              </tr>
+
+              <?php }?>
+              </table>
+      </div>
+      <div class="panel-footer">
+        <form class= "form-inline" action="<?php echo $baseUrl.'/Comment/add?mid='.$mid.'&cid='.$cid.'&type='.$type ?>" method="post">
+                <label for="text">comment</label>
+                <input id='ex5' type="text" name="commentbody" require class="form-control c" />
+                <input type="submit" class="btn btn-primary" value="add" >
+             
+              
+            </form>
+      </div>
+    </div>
+      
+      
+
   </div>
-  <div class="col-sm-4">
-    <h3>
-      <code>
-        Send Your matrial request 
-      </code>
-    </h3>
-  </div>
+      
 </div>
-</br>
-</br>
-<div class="text-left row">
-<div class="col-sm-1">
-  
-</div>
-<div class="col-sm-4">
-  <?php
-  echo $this->requestform;
-  ?>
-</div>
-  
-</div>
+<?php } ?>
 
-
-<?php }
-        ?>
-
-
-
-
-      <!-- Login Model Part -->
+<!-- Login Model Part -->
 
 <div class="container">
   <!-- Modal -->

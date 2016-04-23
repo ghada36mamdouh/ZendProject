@@ -24,6 +24,9 @@ class Application_Model_DbTable_Category extends Zend_Db_Table_Abstract
 	function deleteCategory($id){
 		return $this->delete('id='.$id);
 	}
+	function getCategory($id){
+		return $this->find($id)->toArray();
+	}
 
 }
 

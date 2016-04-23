@@ -9,7 +9,7 @@
         if($this->user['type'] == "admin")
         {
           ?>
-      <li><a href="<?php echo $this->baseUrl(); ?>/Admin">Admin</a></li>
+      <li><a href="<?php echo $this->baseUrl(); ?>/admin">Admin</a></li>
       <?php
     }
     ?>
@@ -63,45 +63,16 @@
 </nav>
 
 </br>
-</br>
-</br>
-</br>
-<?php if($this->logged){
-        ?>
-<div class="row">
-  <div class="col-sm-1">
-  
-  </div>
-  <div class="col-sm-4">
-    <h3>
-      <code>
-        Send Your matrial request 
-      </code>
-    </h3>
-  </div>
+<!-- Booooody Html   -->
+<div class="text-center">
+ <?php
+ 	 		header('Content-disposition: inline');
+            header('Content-type: application/msword'); // not sure if this is the correct MIME type
+            readfile($this->matrials['id']);
+
+ ?>
 </div>
-</br>
-</br>
-<div class="text-left row">
-<div class="col-sm-1">
-  
-</div>
-<div class="col-sm-4">
-  <?php
-  echo $this->requestform;
-  ?>
-</div>
-  
-</div>
-
-
-<?php }
-        ?>
-
-
-
-
-      <!-- Login Model Part -->
+<!-- Login Model Part -->
 
 <div class="container">
   <!-- Modal -->

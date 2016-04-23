@@ -14,7 +14,6 @@ class Application_Model_DbTable_User extends Zend_Db_Table_Abstract
 		$row->password = md5($data['password']);
 		$row->gender = $data['gender'];
 		$row->country = $data['country'];
-		$row->photo = $data['photo'];
 		return $row->save();
 	}
 	function listUsers(){

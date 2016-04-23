@@ -1,8 +1,8 @@
 <?php
 
 class UserController extends Zend_Controller_Action
-{	
-	protected $userModel=null;
+{   
+    protected $userModel=null;
 
     public function init()
     {
@@ -68,7 +68,7 @@ class UserController extends Zend_Controller_Action
     }
     public function banAction()
     {
-    	$id = $this->getRequest()->getParam('id');
+        $id = $this->getRequest()->getParam('id');
         $validate = $this->getRequest()->getParam('validate');
         if($id){
             if($validate==1)
