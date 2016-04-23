@@ -15,7 +15,7 @@ class Application_Form_AddMatrial extends Zend_Form
         $description = new Zend_Form_Element_Text('description');
         $description->setLabel('Matrial description :');
         $description->setRequired(true);
-        $description->setAttrib('class','form-control col-sm-8');
+        $description->setAttrib('class','form-control col-sm-8 input');
 
 
 
@@ -38,7 +38,7 @@ class Application_Form_AddMatrial extends Zend_Form
         $add = new Zend_Form_Element_Submit('add');
         $add->setLabel('add');														
         $add->setAttrib('class','btn-primary btn form-control');
-             
+             // col-sm-2  col-sm-offset-2
         $this->addElements(array(
                         $type,
                         $description,

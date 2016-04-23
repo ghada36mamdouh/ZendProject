@@ -68,7 +68,7 @@
 
 <div id="view-content" class="container">
 	<!-- <p>View script for controller <b>Matrial</b> and script/action name <b>index</b></p> -->
-	<h3><?php echo $this->course[0]['name'] ;?> Course</h3><br><br>
+	<h3><?php echo $this->course[0]['name'] ;?> Course</h3><br>
 	<?php 
 	//var_dump($this->course) ;
 	//var_dump($this->courseMatrial) ; 
@@ -87,16 +87,22 @@
 	<div class="row">
 		<div class="sidebar col-sm-3"><h4>Matrial Types </h4><br>
 			<ul>
-			<a href="<?php echo $baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=pdf' ?>"><li>PDF</li></a>
-			<a href="<?php echo $baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=doc' ?>"><li>doc</li></a>
-			<a href="<?php echo $baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=ppt' ?>"><li>ppt</li></a>
-			<a href="<?php echo $baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=zip' ?>"><li>zip</li></a>
-			<a href="<?php echo $baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=mp4' ?>"><li>vedio</li></a>
+			<a href="<?php echo $baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=pdf' ?>">
+			<li><img src="<?php echo $baseUrl ?>/images/PDF.png" width="30px" height="30px" /> PDF</li>
+			</a>
+			<a href="<?php echo $baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=doc' ?>">
+			<li><img src="<?php echo $baseUrl ?>/images/DOC.png" width="30px" height="30px" /> doc</li></a>
+			<a href="<?php echo $baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=ppt' ?>">
+			<li><img src="<?php echo $baseUrl ?>/images/PPT.png" width="30px" height="30px" /> ppt</li></a>
+			<a href="<?php echo $baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=zip' ?>">
+			<li><img src="<?php echo $baseUrl ?>/images/ZIP.png" width="30px" height="30px" /> zip</li></a>
+			<a href="<?php echo $baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=mp4' ?>">
+			<li><img src="<?php echo $baseUrl ?>/images/MP4.png" width="30px" height="30px" /> vedio</li></a>
 			</ul>
 		</div> 
 		<div class="content col-sm-8">
 		<?php function showMatrail ($type,$courseMatrial,$baseUrl,$commentform,$cid,$editComId,$addform,$MaterialcommentsBlocks) { ?>
-			<h4><?php echo $type ?></h4><hr/>
+			<h4><img src="<?php echo $baseUrl.'/images/'.strtoupper($type).'.png' ?>" width="50px"  height="50px" /> &nbsp; <?php echo $type ?></h4><hr/>
 			<?php  
 
 			for($i=count($courseMatrial)-1 ; $i>=0; $i--){
@@ -105,7 +111,7 @@
 					$mid = $courseMatrial[$i]['id'] ;
 			?>
 			
-					<div class="panel panel-default">
+					<div class="panel panel-info">
 						<div class="panel-heading"><?php echo $courseMatrial[$i]['path']; ?>
 							<div class="actions">
 								<button type="button" class="link" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-edit"><span>Edit
@@ -118,7 +124,7 @@
 									    <div class="modal-content">
 										    <div class="modal-header">
 										        <button type="button" class="close" data-dismiss="modal">&times;</button>
-										        <h4 class="modal-title">Edit Material</h4>
+										        <h4 class="modal-title" style="text-align: center">Edit Material</h4>
 										    </div>
 										    <div class="modal-body">
 										        <p><?php
@@ -178,9 +184,9 @@
 								</div>
 								<div class="row">
 								    <div class="userinfo col-sm-2">
-								    	<img src="<?php echo $baseUrl.'/images/'.$uphoto ?>"  width="30px" height="30px"/>
-								    	<!-- <span><?php //echo $uname ?> : </span> -->
-								    	<?php echo $uname ?> :
+								    	<img src="<?php echo $baseUrl.'/images/'.$uphoto ?>"  width="30px" height="30px"/>&nbsp;
+								    	<span class="text-danger"><?php echo $uname ?> : </span>
+								    	
 								    </div>
 								    <div class="commentbody col-sm-9">
 									<?php if($editComId == $comid) { ?>
@@ -205,7 +211,7 @@
 							<div class="col-sm-11">
 								<input type="text" name="commentbody" require class="form-control" />
 							</div>
-							<input type="submit" class="btn" value="add" >
+							<input type="submit" class="btn btn-warning" value="add" >
 						</form>
 					</div>
 
