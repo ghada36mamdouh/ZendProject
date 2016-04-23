@@ -10,7 +10,6 @@ class MatrialController extends Zend_Controller_Action
 
     public function init()
     {
-        /* Initialize action controller here */
         $this->model = new  Application_Model_DbTable_Material () ;
         $this->commentModel = new Application_Model_DbTable_Comment() ;
         $this->courseModel = new Application_Model_DbTable_Course() ;
@@ -26,17 +25,11 @@ class MatrialController extends Zend_Controller_Action
         $courseMaterials = $this->model->listCourseMaterials($cid) ;
         for($i=0 ; $i<count($courseMaterials); $i++){
                 $mid = $courseMaterials[$i]['id'] ;
-                $materialComments[$mid] = $this->commentModel->listMaterialComments($mid)  ;
                 $MaterialcommentsBlocks[$mid] = $this->commentModel->getMaterialcommentsBlocks($mid) ;
-              //  $materialUsers[$mid] = 
         }
         $this->view->course = $this->courseModel->getCourseById($cid) ;
-        $this->view->courseMatrial =  $courseMaterials;
-        
+        $this->view->courseMatrial =  $courseMaterials;        
         $this->view->MaterialcommentsBlocks = $MaterialcommentsBlocks ;
-
-        $this->view->materialComments =  $materialComments;
-       // $this->view->users =  $materialUsers;
         $this->view->type = $this->getRequest()->getParam('type');
         $this->view->editComId = $this->getRequest()->getParam('editComId');
         $this->view->addform = new Application_Form_AddMatrial();
@@ -54,6 +47,10 @@ class MatrialController extends Zend_Controller_Action
                 $type =  $data['path'] ;
                 $type = substr($type,strrpos( $type,'.')+1); 
                 $data['type'] =$type ;            
+
+                $this->model->addMaterial($data);               
+                $this->redirect('/Matrial?cid='.$data['course_id'].'&type='.$type);
+
                 //var_dump($data);
                  if($cid){
                     $data['course_id']=$cid;
@@ -63,6 +60,7 @@ class MatrialController extends Zend_Controller_Action
                     $this->redirect('/Matrial?cid='.$data['course_id'].'&type='.$type);
                 else
                     $this->redirect('/Matrial/list/?cid='.$data['course_id'].'&type='.$type);
+
 
             }else{
                 $cid = $this->getRequest()->getParam('cid');
@@ -115,6 +113,14 @@ class MatrialController extends Zend_Controller_Action
 
         $form = new Application_Form_AddMatrial();
         if($this->getRequest()->isPost()){
+            //$addform->setDefault('hiddenpath',$courseMatrial[$i]['path']);
+            // $form->file->setRequired(false);
+            var_dump($form->getValue('path')) ;
+            var_dump($form->getValue('hiddenpath')) ;
+
+            if($form->getValue('path') == null){
+                $form->setDefault('path', $form->getValue('hiddenpath'));
+            }
             if($form->isValid($_POST)){
                 $data = $form->getValues();
                 $type =  $data['path'] ;
@@ -231,12 +237,9 @@ class MatrialController extends Zend_Controller_Action
 
             $matrials=$this->matrialModel->getMaterialById($mid);
             $this->view->materials=$matrials[0];
-
             /*$comments=$this->commentModel->listMaterialComments($mid);
             $this->view->comments=$comments;
 */
-
-
         }
         else
         {
@@ -265,9 +268,6 @@ class MatrialController extends Zend_Controller_Action
 
             $matrials=$this->matrialModel->incrementDown($mid,$matrials[0]);
             $this->view->materials=$matrials[0];
-
-
-
         }
         else
         {

@@ -15,7 +15,9 @@ class Application_Form_AddMatrial extends Zend_Form
         $description = new Zend_Form_Element_Text('description');
         $description->setLabel('Matrial description :');
         $description->setRequired(true);
-        $description->setAttrib('class','form-control');
+        $description->setAttrib('class','form-control col-sm-8');
+
+
 
         $file = new Zend_Form_Element_File('path');
         $file->setLabel('Upload Matrial :');
@@ -27,9 +29,12 @@ class Application_Form_AddMatrial extends Zend_Form
         $file->setRequired(true);
         //$file->setAttrib('class','btn-default');
 
+
         $type = new Zend_Form_Element_Hidden('type');
         $course_id = new Zend_Form_Element_Hidden('course_id');
+        $hiddenpath = new Zend_Form_Element_Hidden('hiddenpath');
                
+
         $add = new Zend_Form_Element_Submit('add');
         $add->setLabel('add');														
         $add->setAttrib('class','btn-primary btn form-control');
@@ -38,6 +43,7 @@ class Application_Form_AddMatrial extends Zend_Form
                         $type,
                         $description,
                         $file,
+                        $hiddenpath,
                         $course_id,
                         $add,
         ));
