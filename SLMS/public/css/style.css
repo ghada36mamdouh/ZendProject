@@ -67,6 +67,7 @@ h1,h2,h3,h4 {
 .glyphicon-lock{
     color: #333 ;
 }
+
 .adminsidebar {
     list-style-type: none;
     margin: 0;
@@ -89,4 +90,13 @@ h1,h2,h3,h4 {
 
 .adminsidebar li:hover:not(.active) {
     background-color: #f1f1f1;
+
+}
+/*.userinfo , .commentbody{
+    float: left; 
+}*/
+
+.userinfo img{
+    width:30px ;
+    height:30px;
 }
