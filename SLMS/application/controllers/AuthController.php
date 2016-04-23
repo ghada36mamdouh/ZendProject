@@ -50,6 +50,7 @@ class AuthController extends Zend_Controller_Action
         // action body
         $users = new Application_Model_DbTable_User();
         $form = new Application_Form_Regist();
+        $form->removeElement('photo');
 
         if($this->getRequest()->isPost()){
             

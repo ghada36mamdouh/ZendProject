@@ -2,7 +2,7 @@
 
 class RequestController extends Zend_Controller_Action
 {
-	private $requestModel=null;
+    private $requestModel=null;
 
     public function init()
     {

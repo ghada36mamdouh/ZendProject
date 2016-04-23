@@ -16,6 +16,7 @@ class CategoryController extends Zend_Controller_Action
     {
         // action body
     }
+
     public function addAction()
     {
        if($this->getRequest()->isPost()){
@@ -27,6 +28,7 @@ class CategoryController extends Zend_Controller_Action
         }
         $this->redirect('Admin/list-categories');
     }
+
     public function editAction()
     {  
         $id = $this->getRequest()->getParam('id');
@@ -41,11 +43,12 @@ class CategoryController extends Zend_Controller_Action
         }
         $this->redirect('Admin/list-categories');
     }
+
     public function deleteAction()
     {  
         $id = $this->getRequest()->getParam('id');
         if($id){
-        	$this->categoryModel->deleteCategory($id);
+            $this->categoryModel->deleteCategory($id);
         }
         $this->redirect('Admin/list-categories');
     }

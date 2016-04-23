@@ -15,19 +15,22 @@ class MatrialController extends Zend_Controller_Action
         $this->commentModel = new Application_Model_DbTable_Comment() ;
         $this->courseModel = new Application_Model_DbTable_Course() ;
         $this->userModel = new Application_Model_DbTable_User() ;
+        $this->matrialModel = new Application_Model_DbTable_Material() ;
+        $this->categories=new Application_Model_DbTable_Category();
+        $this->addmaterialForm=new Application_Form_AddMatrial();
     }
 
     public function indexAction()
     {
         $cid = $this->getRequest()->getParam('cid');
-    	$courseMaterials = $this->model->listCourseMaterials($cid) ;
-    	for($i=0 ; $i<count($courseMaterials); $i++){
-    			$mid = $courseMaterials[$i]['id'] ;
-    			$materialComments[$mid] = $this->commentModel->listMaterialComments($mid)  ;
+        $courseMaterials = $this->model->listCourseMaterials($cid) ;
+        for($i=0 ; $i<count($courseMaterials); $i++){
+                $mid = $courseMaterials[$i]['id'] ;
+                $materialComments[$mid] = $this->commentModel->listMaterialComments($mid)  ;
                 $MaterialcommentsBlocks[$mid] = $this->commentModel->getMaterialcommentsBlocks($mid) ;
               //  $materialUsers[$mid] = 
-    	}
-    	$this->view->course = $this->courseModel->getCourseById($cid) ;
+        }
+        $this->view->course = $this->courseModel->getCourseById($cid) ;
         $this->view->courseMatrial =  $courseMaterials;
         
         $this->view->MaterialcommentsBlocks = $MaterialcommentsBlocks ;
@@ -136,6 +139,134 @@ class MatrialController extends Zend_Controller_Action
         $this->model->editMaterial($mid,$data) ;
         $this->redirect('/Matrial?cid='.$cid.'&type='.$type);            
     }
+
+    function listAction()
+    {
+        // action body
+
+
+        $LoginedUser=Zend_Auth::getInstance();
+        if($LoginedUser->hasIdentity())
+        {
+            $authNamespace = new Zend_Session_Namespace('Zend_Auth');
+            $this->view->user=$authNamespace->user;
+            $this->view->logged=True;
+            $this->view->categories=$this->categories->listCategories();
+
+            $courseID=$this->getRequest()->cid;
+            $type=$this->getRequest()->type;
+
+            $matrials=$this->matrialModel->listCourseMaterialsByTypeAndNotBlock($courseID,$type);
+            $this->view->materials=$matrials;
+
+            $this->view->addmaterialform = $this->addmaterialForm;
+
+        }
+        else
+        {
+            $logInform = new Application_Form_Login();
+            $this->view->loginform = $logInform;
+
+            $registform = new Application_Form_Regist();
+            $this->view->registform = $registform;
+        }
+    }
+
+    function indetailsAction()
+    {
+
+        $LoginedUser=Zend_Auth::getInstance();
+        if($LoginedUser->hasIdentity())
+        {
+            $authNamespace = new Zend_Session_Namespace('Zend_Auth');
+            $this->view->user=$authNamespace->user;
+            $this->view->logged=True;
+            $this->view->categories=$this->categories->listCategories();
+
+            $mid=$this->getRequest()->mid;
+
+            $matrials=$this->matrialModel->getMaterialById($mid);
+            $this->view->materials=$matrials[0];
+
+            $comments=$this->commentModel->listMaterialComments($mid);
+            $this->view->comments=$comments;
+
+
+
+        }
+        else
+        {
+            $logInform = new Application_Form_Login();
+            $this->view->loginform = $logInform;
+
+            $registform = new Application_Form_Regist();
+            $this->view->registform = $registform;
+        }
+    }
+
+    function viewAction()
+    {
+        $LoginedUser=Zend_Auth::getInstance();
+        if($LoginedUser->hasIdentity())
+        {
+            $authNamespace = new Zend_Session_Namespace('Zend_Auth');
+            $this->view->user=$authNamespace->user;
+            $this->view->logged=True;
+            $this->view->categories=$this->categories->listCategories();
+
+            $mid=$this->getRequest()->mid;
+
+            $matrials=$this->matrialModel->getMaterialById($mid);
+            $this->view->materials=$matrials[0];
+
+            /*$comments=$this->commentModel->listMaterialComments($mid);
+            $this->view->comments=$comments;
+*/
+
+
+        }
+        else
+        {
+            $logInform = new Application_Form_Login();
+            $this->view->loginform = $logInform;
+
+            $registform = new Application_Form_Regist();
+            $this->view->registform = $registform;
+        }
+
+    }
+
+    function downloadAction()
+    {
+        $LoginedUser=Zend_Auth::getInstance();
+        if($LoginedUser->hasIdentity())
+        {
+            $authNamespace = new Zend_Session_Namespace('Zend_Auth');
+            $this->view->user=$authNamespace->user;
+            $this->view->logged=True;
+            $this->view->categories=$this->categories->listCategories();
+
+            $mid=$this->getRequest()->mid;
+
+            $matrials=$this->matrialModel->getMaterialById($mid);
+
+            $matrials=$this->matrialModel->incrementDown($mid,$matrials[0]);
+            $this->view->materials=$matrials[0];
+
+
+
+        }
+        else
+        {
+            $logInform = new Application_Form_Login();
+            $this->view->loginform = $logInform;
+
+            $registform = new Application_Form_Regist();
+            $this->view->registform = $registform;
+        }
+    }
+
+
 }
 
 

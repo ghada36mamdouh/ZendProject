@@ -9,7 +9,7 @@
         if($this->user['type'] == "admin")
         {
           ?>
-      <li><a href="<?php echo $this->baseUrl(); ?>/Admin">Admin</a></li>
+      <li><a href="<?php echo $this->baseUrl(); ?>/admin">Admin</a></li>
       <?php
     }
     ?>
@@ -63,45 +63,32 @@
 </nav>
 
 </br>
-</br>
-</br>
-</br>
-<?php if($this->logged){
-        ?>
-<div class="row">
-  <div class="col-sm-1">
-  
-  </div>
-  <div class="col-sm-4">
-    <h3>
-      <code>
-        Send Your matrial request 
-      </code>
-    </h3>
-  </div>
+<!-- Booooody Html   -->
+<div class="text-center">
+  <?php if($this->materials['type']=='pdf'){?>
+  <iframe src="<?php echo $this->baseUrl(); ?>/uploadedMatrials/<?php echo $this->materials['path'] ; ?>" 
+  style="width:800px; height:550px;" frameborder="0"></iframe>
+  <?php }
+    elseif ($this->materials['type']=='docx') { ?>
+      <iframe src="<?php echo $this->baseUrl(); ?>/uploadedMatrials/<?php echo $this->materials['path'] ; ?>" 
+  style="width:800px; height:550px;" frameborder="0"></iframe>
+    <?php }
+    elseif ($this->materials['type']=='ppt') { ?>
+
+        <iframe src="<?php echo $this->baseUrl(); ?>/uploadedMatrials/<?php echo $this->materials['path'] ; ?>" 
+  style="width:800px; height:550px;" frameborder="0"></iframe>
+  <?php }
+    elseif ($this->materials['type']=='mp4') { ?>
+
+         <video width="320" height="240" controls>
+          <source src="<?php echo $this->baseUrl(); ?>/uploadedMatrials/<?php echo $this->materials['path'] ; ?>"  type="video/mp4">
+          <source src="<?php echo $this->baseUrl(); ?>/uploadedMatrials/<?php echo $this->materials['path'] ; ?>" type="video/ogg">
+          Your browser does not support the video tag.
+        </video> 
+  <?php }?>
+    
 </div>
-</br>
-</br>
-<div class="text-left row">
-<div class="col-sm-1">
-  
-</div>
-<div class="col-sm-4">
-  <?php
-  echo $this->requestform;
-  ?>
-</div>
-  
-</div>
-
-
-<?php }
-        ?>
-
-
-
-
-      <!-- Login Model Part -->
+<!-- Login Model Part -->
 
 <div class="container">
   <!-- Modal -->
