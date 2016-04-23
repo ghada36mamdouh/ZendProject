@@ -206,7 +206,9 @@
 
                 <?php
                             $URL=$this->baseUrl();
-                            $URL=$URL."/matrial/add?course_id=".$this->materials[0]['course_id'];
+                            $URL=$URL."/matrial/add?course_id=".$this->courseID;
+                            //var_dump($this->courseID);
+                            $this->addmaterialform->setDefault('course_id',$this->courseID) ;
                             $this->addmaterialform->setAction($URL);
                             echo $this->addmaterialform;
 

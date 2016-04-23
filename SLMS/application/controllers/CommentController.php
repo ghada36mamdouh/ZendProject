@@ -34,6 +34,7 @@ class CommentController extends Zend_Controller_Action
         $cid = $this->getRequest()->getParam('cid');
         $mid = $this->getRequest()->getParam('mid');
         $type = $this->getRequest()->getParam('type');
+        $isuser = $this->getRequest()->getParam('isuser');
 
         if($this->getRequest()->isPost()){
            $body = $this->getRequest()->getPost('commentbody');
@@ -45,6 +46,9 @@ class CommentController extends Zend_Controller_Action
                     $this->model->addComment($data);
                     //$this->view->addcommentform = $data ;
              }
+        }
+        if($isuser == 1){
+            $this->redirect('/matrial/indetails/?mid='.$mid) ;
         }  
         $this->redirect('/Matrial?cid='.$cid.'&type='.$type) ;
     }

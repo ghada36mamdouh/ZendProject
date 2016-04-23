@@ -61,19 +61,18 @@ class MatrialController extends Zend_Controller_Action
                 $type = substr($type,strrpos( $type,'.')+1); 
                 $data['type'] =$type ;            
 
-                $this->model->addMaterial($data);               
-                $this->redirect('/Matrial?cid='.$data['course_id'].'&type='.$type);
+                //$this->model->addMaterial($data);               
+                //$this->redirect('/Matrial?cid='.$data['course_id'].'&type='.$type);
 
                 //var_dump($data);
-                 if($cid){
+                if($cid){
                     $data['course_id']=$cid;
-                 }
+                }
                 $this->model->addMaterial($data); 
                 if(!$cid)          
                     $this->redirect('/Matrial?cid='.$data['course_id'].'&type='.$type);
                 else
                     $this->redirect('/Matrial/list/?cid='.$data['course_id'].'&type='.$type);
-
 
             }else{
                 $cid = $this->getRequest()->getParam('cid');
@@ -83,7 +82,6 @@ class MatrialController extends Zend_Controller_Action
 
                 else
                     $this->redirect($baseUrl.'/Matrial/list/?cid='.$cid.'&cname='.$cname);
-
             }
         
         }else{
@@ -190,6 +188,7 @@ class MatrialController extends Zend_Controller_Action
 
             $matrials=$this->matrialModel->listCourseMaterialsByTypeAndNotBlock($courseID,$type);
             $this->view->materials=$matrials;
+            $this->view->courseID=$courseID;
 
             $this->view->addmaterialform = $this->addmaterialForm;
 
@@ -222,8 +221,6 @@ class MatrialController extends Zend_Controller_Action
 
             $comments=$this->commentModel->listMaterialComments($mid);
             $this->view->comments=$comments;
-
-
 
         }
         else

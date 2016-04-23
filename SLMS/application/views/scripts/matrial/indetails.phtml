@@ -110,7 +110,7 @@
               </table>
       </div>
       <div class="panel-footer">
-        <form class= "form-inline" action="<?php echo $baseUrl.'/Comment/add?mid='.$mid.'&cid='.$cid.'&type='.$type ?>" method="post">
+        <form class= "form-inline" action="<?php echo $this->baseUrl().'/Comment/add?mid='.$this->materials['id'].'&cid='.$this->materials['course_id'].'&type='.$this->materials['type'].'&isuser=1' ?>" method="post">
                 <label for="text">comment</label>
                 <input id='ex5' type="text" name="commentbody" require class="form-control c" />
                 <input type="submit" class="btn btn-primary" value="add" >
