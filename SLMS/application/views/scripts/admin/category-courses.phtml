@@ -50,22 +50,37 @@
   </div>
 </nav>
     <!-- ###############  end nav  ################## -->
-<div class="container center">
-  <table cellpadding="10" width="100%" height="100%">
+<div class="container">
+  <table cellpadding="10" cellspacing="10" width="100%" height="100%">
     <tr>
       <td valign="top" width="15%" color="black">
         <br><br><br><br>
         <ul class="adminsidebar">
           <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-users">Users</a></li>
-          <li>
-            <a href="<?php echo $this->baseUrl();?>/Admin/list-categories">Categories</a>
-          </li>
+          <li class="active"><a href="<?php echo $this->baseUrl();?>/Admin/list-categories">Categories</a></li>
           <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-requests">Requests</a></li>
         </ul>
       </td>
-      <td align="center">
-    <!-- ###############  Body  ################## -->
-     <h1>Admin Home</h1>
-    </td>
-  </tr>
-</table>
+      <td>
+   <!-- ############### Body  ################## -->
+      <?php if($this->courses) {?>
+      	<h1 align="center"><?php echo $this->courses[0]['cname'] ?> courses</h1><br />
+      		<?php for($i=0; $i<count($this->courses); $i++){ ?>
+        			<div class="col-sm-4">
+      				<div class="panel panel-primary">
+      					<div class="panel-heading"><?php echo  $this->courses[$i]['name'];?></div>
+      				  	<div class="panel-body">
+      				  		<?php echo  $this->courses[$i]['description'];?>
+      				  	</div>
+                  <div class="panel-footer">
+                    <a href="">Matrial</a>
+                  </div>
+      				</div>
+      			</div>
+          <?php }} ?>
+      	</div>
+   <!-- ###############  end Body  ################## -->
+      </td>
+    </tr>
+  </table>
+</div>

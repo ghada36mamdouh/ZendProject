@@ -16,8 +16,12 @@ class Application_Model_DbTable_Course extends Zend_Db_Table_Abstract
 		return $this->fetchAll()->toArray();
 	}
 	function listCategoryCourses($cid){
-		$sql = $this->select()->setIntegrityCheck(false)->where('cid='.$cid);
-		return $this->fetchAll($sql)->toArray();
+		/*$sql = $this->select()->setIntegrityCheck(false)->where('cid='.$cid);
+		return $this->fetchAll($sql)->toArray();*/
+
+		$select = $this->select()->from('courses')->join(array('c'=>'categories'),'courses.cid = c.id',array('cname'=>'name'))->where("courses.cid =".$cid)->setIntegrityCheck(FALSE); 
+		$result = $this->fetchAll($select)->toArray();
+		return $result;
 	}
 	function getCourseById($id){
 		return $this->find($id)->toArray();

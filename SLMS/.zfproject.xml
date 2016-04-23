@@ -45,6 +45,9 @@
         <actionMethod actionName="listUsers"/>
         <actionMethod actionName="listCategories"/>
         <actionMethod actionName="listRequests"/>
+        <actionMethod actionName="categoryCourses"/>
+        <actionMethod actionName="addUser"/>
+        <actionMethod actionName="addCategory"/>
       </controllerFile>
       <formsDirectory enabled="false">
         <formFile formName="AddMatrial"/>
@@ -60,6 +63,8 @@
         <formFile formName="Login"/>
         <formFile formName="Regist"/>
         <formFile formName="Request"/>
+        <formFile formName="adduser"/>
+        <formFile formName="addcategory"/>
       </formsDirectory>
       <layoutsDirectory enabled="false"/>
       <modelsDirectory>
@@ -142,6 +147,15 @@
         </viewControllerScriptsDirectory>
         <viewControllerScriptsDirectory forControllerName="Admin">
           <viewScriptFile forActionName="listRequests"/>
+        </viewControllerScriptsDirectory>
+        <viewControllerScriptsDirectory forControllerName="Admin">
+          <viewScriptFile forActionName="categoryCourses"/>
+        </viewControllerScriptsDirectory>
+        <viewControllerScriptsDirectory forControllerName="Admin">
+          <viewScriptFile forActionName="addUser"/>
+        </viewControllerScriptsDirectory>
+        <viewControllerScriptsDirectory forControllerName="Admin">
+          <viewScriptFile forActionName="addCategory"/>
         </viewControllerScriptsDirectory>
         <viewFiltersDirectory enabled="false"/>
       </viewsDirectory>
