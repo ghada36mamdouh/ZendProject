@@ -6,14 +6,12 @@
 	<?php 
 	//var_dump($this->course) ;
 	//var_dump($this->courseMatrial) ; 
-	$materialComments = $this->materialComments ;
 	$courseMatrial = $this->courseMatrial ;
+	$MaterialcommentsBlocks= $this->MaterialcommentsBlocks ;  
 	$cid = $this->course[0]['id'] ;
 	$baseUrl = $this->baseUrl() ;
 	$editComId = $this->editComId;
 	$addform =$this->addform ;
-
-	$MaterialcommentsBlocks= $this->MaterialcommentsBlocks ;  //// 
 
 	//global
 	?>
@@ -31,7 +29,7 @@
 			</ul>
 		</div> 
 		<div class="content col-sm-8">
-		<?php function showMatrail ($type,$courseMatrial,$materialComments,$baseUrl,$commentform,$cid,$editComId,$addform,$MaterialcommentsBlocks) { ?>
+		<?php function showMatrail ($type,$courseMatrial,$baseUrl,$commentform,$cid,$editComId,$addform,$MaterialcommentsBlocks) { ?>
 			<h4><?php echo $type ?></h4><hr/>
 			<?php  
 
@@ -58,10 +56,9 @@
 										    </div>
 										    <div class="modal-body">
 										        <p><?php
-										        	$addform->setDefault('description',$courseMatrial[$i]['description']) ;
+										        	$addform->setDefault('description',$courseMatrial[$i]['description']) ;										        	
+										        	$addform->setDefault('hiddenpath',$courseMatrial[$i]['path']);
 
-										        	//$addform->path->_setValue($courseMatrial[$i]['path']) ;
-										        	$addform->setDefault('path',$courseMatrial[$i]['path']) ;
 										        	$addform->setAction($baseUrl.'/Matrial/edit?mid='.$mid.'&type='.$type.'&cid='.$cid) ;
 										        	echo  $addform ; ?>
 										        </p>
@@ -95,17 +92,12 @@
 					</div>
 					<div class="panel-body">
 						<?php 
-						for($j=0 ; $j<count($materialComments[$mid]); $j++){
+						for($j=0 ; $j<count($MaterialcommentsBlocks[$mid]); $j++){
 
-								$uname = $MaterialcommentsBlocks[$mid][$j]['uname'];  //// 
-								$uphoto = $MaterialcommentsBlocks[$mid][$j]['photo'];  //// 
-								//var_dump($MaterialcommentsBlocks[$mid][$j]) ;
-
+								$uname = $MaterialcommentsBlocks[$mid][$j]['uname'];   
+								$uphoto = $MaterialcommentsBlocks[$mid][$j]['photo'];  
 								$combody = $MaterialcommentsBlocks[$mid][$j]['body'] ;
 								$comid = $MaterialcommentsBlocks[$mid][$j]['id'] ;
-
-								// $comid = $materialComments[$mid][$j]['id'] ;
-								// $combody = $materialComments[$mid][$j]['body'] ;
 							?>
 
 							<div class="well well-sm" style="background-color:;">
@@ -158,7 +150,7 @@
 			?>
 		<hr/>
 		<?php 
-		} showMatrail ($this->type,$courseMatrial,$materialComments,$baseUrl,$this->commentform,$cid,$editComId,$addform,$MaterialcommentsBlocks) ;
+		} showMatrail ($this->type,$courseMatrial,$baseUrl,$this->commentform,$cid,$editComId,$addform,$MaterialcommentsBlocks) ;
 		?>
 	</div>
 
