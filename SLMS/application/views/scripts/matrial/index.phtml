@@ -1,7 +1,9 @@
 <br /><br />
+<?php var_dump($this->MaterialcommentsBlocks[7][0]['uname']) ; ?>
+
 <div id="view-content" class="container">
 	<!-- <p>View script for controller <b>Matrial</b> and script/action name <b>index</b></p> -->
-	<h3><?php $this->course[0]['name']?> Course</h3><br><br>
+	<h3><?php echo $this->course[0]['name'] ;?> Course</h3><br><br>
 	<?php 
 	//var_dump($this->course) ;
 	//var_dump($this->courseMatrial) ; 
@@ -9,7 +11,9 @@
 	$courseMatrial = $this->courseMatrial ;
 	$cid = $this->course[0]['id'] ;
 	$baseUrl = $this->baseUrl() ;
-	$baseUrl = $this->baseUrl() ;
+	$editComId = $this->editComId;
+	$addform =$this->addform ;
+	//global
 	?>
 
 	<a href="<?php echo $baseUrl.'/Matrial/add?cid='.$this->course[0]['id'].'&cname='.$this->course[0]['name'] ?>" class="addlink" >Add Matrial</a><br/><br/> 
@@ -17,7 +21,7 @@
 	<div class="row">
 		<div class="sidebar col-sm-3"><h4>Matrial Types </h4><br>
 			<ul>
-			<a href="<?php echo $baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=pdf' ?>"><li >PDF</li></a>
+			<a href="<?php echo $baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=pdf' ?>"><li>PDF</li></a>
 			<a href="<?php echo $baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=doc' ?>"><li>doc</li></a>
 			<a href="<?php echo $baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=ppt' ?>"><li>ppt</li></a>
 			<a href="<?php echo $baseUrl.'/Matrial/?cid='.$this->course[0]['id'].'&type=zip' ?>"><li>zip</li></a>
@@ -25,7 +29,7 @@
 			</ul>
 		</div> 
 		<div class="content col-sm-8">
-		<?php function showMatrail ($type,$courseMatrial,$materialComments,$baseUrl,$commentform,$cid) { ?>
+		<?php function showMatrail ($type,$courseMatrial,$materialComments,$baseUrl,$commentform,$cid,$editComId,$addform) { ?>
 			<h4><?php echo $type ?></h4><hr/>
 			<?php  
 
@@ -38,10 +42,35 @@
 					<div class="panel panel-default">
 						<div class="panel-heading"><?php echo $courseMatrial[$i]['path']; ?>
 							<div class="actions">
-								<a href="<?php echo $baseUrl.'/Matrial/edit/id/'.$mid ; ?>">
-									<span class="glyphicon glyphicon-edit"><span>Edit 
-								</a>
+								<button type="button" class="link" data-toggle="modal" data-target="#myModal"><span class="glyphicon glyphicon-edit"><span>Edit
+								</button>
 								&nbsp;&nbsp;
+								<!-- Modal -->
+								<div id="myModal" class="modal fade" role="dialog">
+									<div class="modal-dialog">
+									    <!-- Modal content-->
+									    <div class="modal-content">
+										    <div class="modal-header">
+										        <button type="button" class="close" data-dismiss="modal">&times;</button>
+										        <h4 class="modal-title">Edit Material</h4>
+										    </div>
+										    <div class="modal-body">
+										        <p><?php
+										        	$addform->setDefault('description',$courseMatrial[$i]['description']) ;
+
+										        	//$addform->path->_setValue($courseMatrial[$i]['path']) ;
+										        	$addform->setDefault('path',$courseMatrial[$i]['path']) ;
+										        	$addform->setAction($baseUrl.'/Matrial/edit?mid='.$mid.'&type='.$type.'&cid='.$cid) ;
+										        	echo  $addform ; ?>
+										        </p>
+										    </div>
+										    <div class="modal-footer">
+										    </div>
+										</div>
+									</div>
+								</div>
+
+								<!-- end of model - -->
 								<a href="<?php echo $baseUrl.'/Matrial/delete?mid='.$mid.'&type='.$type.'&cid='.$cid ; ?>">
 									<span class="glyphicon glyphicon-trash" ></span>Delete 
 								</a>
@@ -64,15 +93,34 @@
 					</div>
 					<div class="panel-body">
 						<?php 
-						for($j=0 ; $j<count($materialComments[$mid]); $j++){ ?>
+						for($j=0 ; $j<count($materialComments[$mid]); $j++){ 
+								$comid = $materialComments[$mid][$j]['id'] ;
+								$combody = $materialComments[$mid][$j]['body'] ;
+							?>
 
 							<div class="well well-sm" style="background-color:;">
 								<div class="actions">
-									<a href=""><span class="glyphicon glyphicon-edit"> <span></a>
-									<a href="<?php echo $baseUrl.'/Comment/delete?type='.$type.'&cid='.$cid.'&comid='.$materialComments[$mid][$j]['id'] ?> ">
-									<span  class="glyphicon glyphicon-trash" ><span></a>
+									<a href="<?php echo $baseUrl.'/Comment/edit?type='.$type.'&cid='.$cid.'&comid='.$comid ?>">
+										<span class="glyphicon glyphicon-edit"> <span>
+									</a>
+
+									<a href="<?php echo $baseUrl.'/Comment/delete?type='.$type.'&cid='.$cid.'&comid='.$comid ?> ">
+										<span  class="glyphicon glyphicon-trash" ><span>
+									</a>
 								</div>
-									<div><?php echo $materialComments[$mid][$j]['body'] ?></div>
+								  
+									<?php if($editComId == $comid) { ?>
+										<div>
+											<form action="<?php echo $baseUrl.'/Comment/edit?type='.$type.'&cid='.$cid.'&comid='.$comid ?>" method="post">
+												<div class="col-sm-10">
+													<input type="text" name="commentbody" require class="form-control" value="<?php echo $combody ?>" />
+												</div>
+												<input type="submit" class="btn btn-success" value="save" >
+											</form>
+										</div>
+									<?php }else { ?>
+										<div><?php echo $combody ?></div>
+									<?php } ?>
 								</div>
 
 						<?php } ?>
@@ -92,7 +140,7 @@
 			?>
 		<hr/>
 		<?php 
-		} showMatrail ($this->type,$courseMatrial,$materialComments,$baseUrl,$this->commentform,$cid) ;
+		} showMatrail ($this->type,$courseMatrial,$materialComments,$baseUrl,$this->commentform,$cid,$editComId,$addform) ;
 		?>
 	</div>
 

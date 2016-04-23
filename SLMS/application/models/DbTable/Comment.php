@@ -40,5 +40,9 @@ class Application_Model_DbTable_Comment extends Zend_Db_Table_Abstract
 	function deleteMaterialComments($id){
 		return $this->delete('mid='.$id);
 	}
+	function getMaterialcommentsBlocks($mid){
+		$select = $this->select()->from('comment')->join(array('u'=>'users'),'comment.uid = u.id',array('uname'=>'name','photo'=>'photo'))->where("comment.mid =".$mid)->setIntegrityCheck(FALSE);
+		return $this->fetchAll($select );
+	}
 
 }

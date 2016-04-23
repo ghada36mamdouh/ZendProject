@@ -21,11 +21,11 @@ class Application_Form_AddMatrial extends Zend_Form
         $file->setLabel('Upload Matrial :');
         $file->setAttrib('id', 'path') ;
         $file->setDestination(__DIR__.'/../../public/uploadedMatrials') ;
-        $file->addValidator('extension', true, array('mp4','doc','pdf','ppt','zip')) ;
-       // $file->setValueDisabled(true);
+        // $file->addValidator('extension', true, array('mp4','doc','pdf','ppt','zip')) ;
+        // $file->setValueDisabled(true);
             //->addValidator('Size', false, 10240000)          
         $file->setRequired(true);
-        //$file->setAttrib('class','btn-primary');
+        //$file->setAttrib('class','btn-default');
 
         $type = new Zend_Form_Element_Hidden('type');
         $course_id = new Zend_Form_Element_Hidden('course_id');

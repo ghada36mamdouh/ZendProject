@@ -3,7 +3,7 @@
 -- http://www.phpmyadmin.net
 --
 -- Host: localhost
--- Generation Time: Apr 19, 2016 at 04:07 PM
+-- Generation Time: Apr 22, 2016 at 02:08 PM
 -- Server version: 5.5.47-0ubuntu0.14.04.1
 -- PHP Version: 5.5.9-1ubuntu4.14
 
@@ -31,7 +31,14 @@ CREATE TABLE IF NOT EXISTS `categories` (
   `name` varchar(50) NOT NULL,
   `description` varchar(100) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `categories`
+--
+
+INSERT INTO `categories` (`id`, `name`, `description`) VALUES
+(1, 'os', 'opensource');
 
 -- --------------------------------------------------------
 
@@ -48,7 +55,14 @@ CREATE TABLE IF NOT EXISTS `comment` (
   KEY `uid` (`uid`),
   KEY `mid` (`mid`),
   KEY `mid_2` (`mid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=24 ;
+
+--
+-- Dumping data for table `comment`
+--
+
+INSERT INTO `comment` (`id`, `body`, `uid`, `mid`) VALUES
+(11, 'sdnjbn;djnb alkafd', 1, 7);
 
 -- --------------------------------------------------------
 
@@ -63,7 +77,14 @@ CREATE TABLE IF NOT EXISTS `courses` (
   `cid` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `cid` (`cid`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=2 ;
+
+--
+-- Dumping data for table `courses`
+--
+
+INSERT INTO `courses` (`id`, `name`, `description`, `cid`) VALUES
+(1, 'PHP', 'programming language zend framework', 1);
 
 -- --------------------------------------------------------
 
@@ -73,7 +94,7 @@ CREATE TABLE IF NOT EXISTS `courses` (
 
 CREATE TABLE IF NOT EXISTS `materials` (
   `id` int(11) NOT NULL AUTO_INCREMENT,
-  `type` int(11) NOT NULL,
+  `type` varchar(50) NOT NULL,
   `description` varchar(100) NOT NULL,
   `path` varchar(100) NOT NULL,
   `numdownloads` int(11) NOT NULL,
@@ -82,7 +103,23 @@ CREATE TABLE IF NOT EXISTS `materials` (
   `course_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   KEY `course_id` (`course_id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=40 ;
+
+--
+-- Dumping data for table `materials`
+--
+
+INSERT INTO `materials` (`id`, `type`, `description`, `path`, `numdownloads`, `enabledownload`, `isshow`, `course_id`) VALUES
+(7, 'mp4', 'php lec2 vedio', 'php/lec2.mp4', 0, 1, 1, 1),
+(9, 'ppt', 'ay haga', 'Zend_Framework_Day3.ppt', 0, 1, 1, 1),
+(12, '', 'ooop', 'Postfix Mail server.docx', 0, 1, 1, 1),
+(13, '', 'ooop', 'Postfix Mail server.docx', 0, 1, 1, 1),
+(14, '', 'use for study ', 'Postfix Mail server.docx', 0, 1, 1, 1),
+(17, 'docx', 'jaa', 'Postfix Mail server.docx', 0, 1, 1, 1),
+(18, 'docx', 'jaa', 'Postfix Mail server.docx', 0, 1, 1, 1),
+(19, 'docx', 'jaa', 'Postfix Mail server.docx', 0, 1, 1, 1),
+(27, 'zip', 'ooopsssss', 'zend_blog.zip', 0, 1, 1, 1),
+(39, 'pdf', 'day2', 'Zend_Framework_Day2.pdf', 0, 1, 1, 1);
 
 -- --------------------------------------------------------
 
@@ -116,7 +153,14 @@ CREATE TABLE IF NOT EXISTS `users` (
   `isvalid` tinyint(1) NOT NULL DEFAULT '1',
   `code` varchar(32) NOT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 AUTO_INCREMENT=1 ;
+) ENGINE=InnoDB  DEFAULT CHARSET=latin1 AUTO_INCREMENT=3 ;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `type`, `gender`, `country`, `photo`, `signature`, `isvalid`, `code`) VALUES
+(1, 'ghada', 'ghada@gmail.com', '123', 'regular', 'female', '', '', '', 1, '');
 
 --
 -- Constraints for dumped tables
@@ -126,8 +170,8 @@ CREATE TABLE IF NOT EXISTS `users` (
 -- Constraints for table `comment`
 --
 ALTER TABLE `comment`
-  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`mid`) REFERENCES `materials` (`id`),
-  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `comment_ibfk_1` FOREIGN KEY (`uid`) REFERENCES `users` (`id`),
+  ADD CONSTRAINT `comment_ibfk_2` FOREIGN KEY (`mid`) REFERENCES `materials` (`id`);
 
 --
 -- Constraints for table `courses`

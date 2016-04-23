@@ -35,5 +35,6 @@ class Application_Model_DbTable_Material extends Zend_Db_Table_Abstract
 	function deleteMaterial($id){
 		return $this->delete('id='.$id);
 	}
+	
 }
 

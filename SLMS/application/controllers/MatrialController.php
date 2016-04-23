@@ -19,22 +19,26 @@ class MatrialController extends Zend_Controller_Action
 
     public function indexAction()
     {
-    	$cid = $this->getRequest()->getParam('cid');
+        $cid = $this->getRequest()->getParam('cid');
     	$courseMaterials = $this->model->listCourseMaterials($cid) ;
     	for($i=0 ; $i<count($courseMaterials); $i++){
     			$mid = $courseMaterials[$i]['id'] ;
     			$materialComments[$mid] = $this->commentModel->listMaterialComments($mid)  ;
+                $MaterialcommentsBlocks[$mid] = $this->commentModel->getMaterialcommentsBlocks($mid) ;
               //  $materialUsers[$mid] = 
     	}
     	$this->view->course = $this->courseModel->getCourseById($cid) ;
         $this->view->courseMatrial =  $courseMaterials;
+        
+        $this->view->MaterialcommentsBlocks = $MaterialcommentsBlocks ;
+
         $this->view->materialComments =  $materialComments;
        // $this->view->users =  $materialUsers;
         $this->view->type = $this->getRequest()->getParam('type');
-
+        $this->view->editComId = $this->getRequest()->getParam('editComId');
+        $this->view->addform = new Application_Form_AddMatrial();
         // $commentform = new Application_Form_AddComment();
-        // $this->view->commentform = $commentform ; 
-
+        // $this->view->commentform = $commentform ;    
     }
 
     public function addAction()
@@ -82,6 +86,36 @@ class MatrialController extends Zend_Controller_Action
     
         $this->redirect('/Matrial?cid='.$cid.'&type='.$type);            
     }
+//------------------------------------------------------------
+     public function editAction()
+    {                             
+        $mid = $this->getRequest()->getParam('mid');     
+        $cid = $this->getRequest()->getParam('cid');     
+        $type = $this->getRequest()->getParam('type');
+        $editedMaterial = $this->model->getMaterialById($mid);
+
+        $oldfile = $editedMaterial[0]['path'] ;
+        $materialCourse_id = $editedMaterial[0]['course_id'] ;
+
+        $form = new Application_Form_AddMatrial();
+        if($this->getRequest()->isPost()){
+            if($form->isValid($_POST)){
+                $data = $form->getValues();
+                $type =  $data['path'] ;
+                $type = substr($type,strrpos($type,'.')+1); 
+                $data['type'] =$type ;            
+                $data['course_id'] =$materialCourse_id ;            
+                $this->model->editMaterial($mid,$data); 
+                $old = getcwd(); 
+                chdir($old.'/uploadedMatrials');
+                chmod($oldfile,0777);
+                unlink($oldfile);
+                chdir($old);                     
+            }
+        }
+        $this->redirect('/Matrial?cid='.$cid.'&type='.$type);            
+    }
+//--------------------------------------------------------------
     public function visibleAction()
     {                             
         $v = $this->getRequest()->getParam('v');     

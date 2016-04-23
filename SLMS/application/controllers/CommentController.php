@@ -47,5 +47,24 @@ class CommentController extends Zend_Controller_Action
         $this->model->deleteComments($comid);	
         $this->redirect('/Matrial?cid='.$cid.'&type='.$type) ;
     }
+
+     public function editAction()
+    {   
+        $cid = $this->getRequest()->getParam('cid');
+        $comid = $this->getRequest()->getParam('comid');
+        $type = $this->getRequest()->getParam('type');
+
+        if($this->getRequest()->isPost()){
+           $body = $this->getRequest()->getPost('commentbody');
+           if(!empty($body)){
+                    $data['body'] = $body ;
+                    $this->model->editComment($comid,$data);
+            }
+            $this->redirect('/Matrial?cid='.$cid.'&type='.$type.'&editComId=') ;
+        }else{
+            $this->redirect('/Matrial?cid='.$cid.'&type='.$type.'&editComId='.$comid) ;
+        } 
+
+    }
 }
 
