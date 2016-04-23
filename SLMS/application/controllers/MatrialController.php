@@ -222,6 +222,12 @@ class MatrialController extends Zend_Controller_Action
             $comments=$this->commentModel->listMaterialComments($mid);
             $this->view->comments=$comments;
 
+            $MaterialcommentsBlocks[$mid] = $this->commentModel->getMaterialcommentsBlocks($mid) ;
+            $this->view->MaterialcommentsBlocks = $MaterialcommentsBlocks ;
+
+
+            $this->view->editComId = $this->getRequest()->getParam('editComId');
+
         }
         else
         {

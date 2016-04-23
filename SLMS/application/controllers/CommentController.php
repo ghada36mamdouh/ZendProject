@@ -103,15 +103,25 @@ class CommentController extends Zend_Controller_Action
         $comid = $this->getRequest()->getParam('comid');
         $type = $this->getRequest()->getParam('type');
 
+        $mid = $this->getRequest()->getParam('mid');
+        $isuser = $this->getRequest()->getParam('isuser');
+
         if($this->getRequest()->isPost()){
            $body = $this->getRequest()->getPost('commentbody');
            if(!empty($body)){
                     $data['body'] = $body ;
                     $this->model->editComment($comid,$data);
             }
-            $this->redirect('/Matrial?cid='.$cid.'&type='.$type.'&editComId=') ;
+            if(!$isuser)
+                $this->redirect('/Matrial?cid='.$cid.'&type='.$type.'&editComId=') ;
+            else
+                $this->redirect('/Matrial/indetails?mid='.$mid.'&type='.$type.'&editComId=') ;
+
         }else{
-            $this->redirect('/Matrial?cid='.$cid.'&type='.$type.'&editComId='.$comid) ;
+            if(!$isuser)
+                $this->redirect('/Matrial?cid='.$cid.'&type='.$type.'&editComId='.$comid) ;
+            else
+                $this->redirect('/Matrial/indetails?mid='.$mid.'&type='.$type.'&editComId='.$comid) ;
         } 
 
     }

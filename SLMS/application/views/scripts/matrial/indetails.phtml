@@ -83,25 +83,53 @@
       <div class="panel-body">
         <table class="table">
         <?php
-              foreach ($this->comments as $comment) {
+        $mid =$this->materials['id'];
+
+            for($i =0 ; $i<count($this->MaterialcommentsBlocks[$mid]) ; $i++){
+             // var_dump($this->MaterialcommentsBlocks[$mid][$i]['']) ;
+                 $uname = $this->MaterialcommentsBlocks[$mid][$i]['uname'] ;
+                 $photo = $this->MaterialcommentsBlocks[$mid][$i]['photo'] ;
+                 $comid = $this->MaterialcommentsBlocks[$mid][$i]['id'] ;
+                 $uid = $this->MaterialcommentsBlocks[$mid][$i]['uid'] ;
+                 $combody = $this->MaterialcommentsBlocks[$mid][$i]['body'] ;
               ?>
               <tr>
-                <td><b><?php echo $comment['body'] ?></b></td>
                 <td></td>
+                <td><img src="<?php echo $photo ?>"  width="30px" height="30px" />&nbsp;<?php echo $uname ?></td>
                 <td></td>
+                <td colspan="2">            
+
+                  <?php if($this->editComId == $comid) { ?>                  
+                      <form action="<?php echo $this->baseUrl(); ?>/comment/edit/?comid=<?php echo $comid;?>&mid=<?php echo $mid;?>&type=<?php echo $this->materials['type'];?>&isuser=1" method="post">
+                        <div class="col-sm-10">
+                          <input type="text" name="commentbody" require class="form-control" value="<?php echo $combody ?>" />
+                        </div>
+                        <input type="submit" class="btn btn-success" value="save" >
+                      </form>
+                    
+                  <?php }else { ?>
+                    <b><?php echo $combody ; ?></b>
+                  <?php } ?>
+
+
+
+                
+                </td>
                 <td></td>
-                <?php if($comment['uid'] == $this->user['id']) {?>
+                <?php if($uid == $this->user['id']) {?>
                   <td>
-                      <a href="<?php echo $this->baseUrl(); ?>/comment/del/?cmid=<?php echo $comment['id'] ;?>&mid=<?php echo $this->materials['id'] ;?>&type=<?php echo $this->materials['type'] ;?>">
+
+                      <a href="<?php echo $this->baseUrl(); ?>/comment/edit/?comid=<?php echo $comid ;?>&mid=<?php echo $mid ;?>&type=<?php echo $this->materials['type'];?>&isuser=1">
                         <span class="glyphicon glyphicon-edit"><span>Edit 
                       </a>
-                      <a href="<?php echo $this->baseUrl(); ?>/comment/del/?cmid=<?php echo $comment['id'];?>&mid=<?php echo $this->materials['id'];?>&type=<?php echo $this->materials['type'];?>">
+           
+                      <a href="<?php echo $this->baseUrl(); ?>/comment/del/?cmid=<?php echo $comid ;?>&mid=<?php echo $this->materials['id'];?>&type=<?php echo $this->materials['type'];?>">
                         <span class="glyphicon glyphicon-trash" ></span>Delete 
                       </a>
                   </td>
                 <?php } 
                   else {?>
-                  <td></td>
+                  <!-- <td></td> -->
                   <?php }?>
                 
               </tr>
@@ -113,9 +141,7 @@
         <form class= "form-inline" action="<?php echo $this->baseUrl().'/Comment/add?mid='.$this->materials['id'].'&cid='.$this->materials['course_id'].'&type='.$this->materials['type'].'&isuser=1' ?>" method="post">
                 <label for="text">comment</label>
                 <input id='ex5' type="text" name="commentbody" require class="form-control c" />
-                <input type="submit" class="btn btn-primary" value="add" >
-             
-              
+                <input type="submit" class="btn btn-primary" value="add" >            
             </form>
       </div>
     </div>
@@ -146,9 +172,7 @@
                 if(isset($this->errorMessage)){
 
                             echo $this->errorMessage;
-
                 }?>
-
                 <?php
 
                             echo $this->loginform;
@@ -178,19 +202,14 @@
         </div>
         <div class="modal-body">
                  <?php
-
                 if(isset($this->errorMessage)){
 
                             echo $this->errorMessage;
-
                 }?>
-
                 <?php
 
                             echo $this->registform;
-
                 ?>
-
         </div>
         <div class="modal-footer">
           <button type="button" class="btn btn-success" data-dismiss="modal">Close</button>
