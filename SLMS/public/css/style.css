@@ -67,3 +67,12 @@ h1,h2,h3,h4 {
 .glyphicon-lock{
     color: #333 ;
 }
+
+/*.userinfo , .commentbody{
+    float: left; 
+}*/
+
+.userinfo img{
+    width:30px ;
+    height:30px;
+}
