@@ -13,10 +13,17 @@
       <?php
     }
     ?>
-    <li>
-          <a href="<?php echo $this->baseUrl(); ?>">
-          <span class="glyphicon glyphicon-tasks"> </span> Courses</a>
-    </li>
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+        <?php
+          foreach ($this->categories as $category) {
+        ?>
+          <li><a href="<?php echo $this->baseUrl(); ?>/course/list?id=<?php echo $category['id'] ?>"><?php echo $category['name'] ?> </a></li>
+          <?php } ?>
+        </ul>
+      </li>
     </ul>
     </div>
     <div class="col-sm-3">
@@ -73,7 +80,7 @@
       				  		<?php echo  $this->courses[$i]['description'];?>
       				  	</div>
                   <div class="panel-footer">
-                    <a href="">Matrial</a>
+                    <a href="<?php echo $this->baseUrl();?>/matrial/?cid=<?php echo $this->courses[$i]['id'];?>&type=pdf">Matrial</a>
                   </div>
       				</div>
       			</div>

@@ -39,7 +39,7 @@ class Application_Model_DbTable_Material extends Zend_Db_Table_Abstract
 		return $this->delete('id='.$id);
 	}
 	function listCourseMaterialsByTypeAndNotBlock($cid,$t){
-		$select = $this->select()->where('course_id='.$cid)->where(' isshow=1');
+		$select = $this->select()->where('course_id='.$cid)->where(' isshow=1')->where('type="'.$t.'"');
 		return $this->fetchAll($select)->toArray();
 	}
 

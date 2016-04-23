@@ -18,20 +18,24 @@ class AdminController extends Zend_Controller_Action
        $this->materialModel=new Application_Model_DbTable_Material();
        $this->commentModel=new Application_Model_DbTable_Comment();
        $this->requestModel=new Application_Model_DbTable_Request();
+       $this->view->categories=$this->categoryModel->listCategories();
 
-       /*$authorization =Zend_Auth::getInstance();
+       $authorization =Zend_Auth::getInstance();
         if(!$authorization->hasIdentity()) {
             $this->redirect('/');      
-        }*/
+        }
         $authNamespace = new Zend_Session_Namespace('Zend_Auth');
         $this->view->user=$authNamespace->user;
-
+        if($authNamespace->user['type']!='admin') {
+            $this->redirect('/');      
+        }
         $this->view->logged=True;
                    
     }
 
     public function indexAction()
     {
+
     }
     public function listUsersAction()
     {
@@ -49,7 +53,15 @@ class AdminController extends Zend_Controller_Action
     }
     public function listRequestsAction()
     {
-        $this->view->requests = $this->requestModel->listRequestsandUsers();
+        $courses=$this->courseModel->listCourses();
+        $this->view->courses=$courses;
+        $id = $this->getRequest()->getParam('id');
+        $cid=0;
+        if($id)
+            $cid=$id-1;
+        
+        $this->view->requests = $this->requestModel->listRequestsandUsers($courses[$cid]['id']);
+
     }
     public function categoryCoursesAction()
     {
@@ -59,7 +71,14 @@ class AdminController extends Zend_Controller_Action
     }
     public function addUserAction()
     {
-        $this->view->form = new Application_Form_adduser(); 
+        $form=new Application_Form_Regist();
+        $URL="../User/add";
+        $form->setAction($URL);
+        $form->removeElement('photo');
+        $form->getElement('Register')->setLabel('Add');
+        $form->removeElement('confirmPassword');
+        $form->removeElement('signature');
+        $this->view->form =$form; 
     }
     public function addCategoryAction()
     {

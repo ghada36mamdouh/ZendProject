@@ -20,18 +20,18 @@ class UserController extends Zend_Controller_Action
     }
     public function addAction()
     {
+        $form = new Application_Form_Regist();
         if($this->getRequest()->isPost()){
-            $name = $this->getRequest()->getParam('name');
-            $email = $this->getRequest()->getParam('email');
-            $gender = $this->getRequest()->getParam('gender');
-            $country = $this->getRequest()->getParam('country');
-            $data['name']=$name;
-            $data['email']=$email;
-            $data['gender']=$gender;
-            $data['country']=$country;
-            $this->userModel->addUser($data);  
+            $form->removeElement('photo');
+            $form->removeElement('confirmPassword');
+            $form->removeElement('signature');
+            if($form->isValid($_POST)){
+                $data=$this->getRequest()->getParams();
+                $this->userModel->addUser($data); 
+                $this->redirect('Admin/list-users'); 
+            }
         }
-        $this->redirect('Admin/list-users');
+        $this->redirect('Admin/add-user');
        
     }
     public function editAction()
