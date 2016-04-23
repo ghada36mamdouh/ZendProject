@@ -3,20 +3,26 @@
 class CommentController extends Zend_Controller_Action
 {
     private $model =null ;
+    private $user = null ;
     public function init()
     {
         $this->model =  new Application_Model_DbTable_Comment ();
         $this->matrialModel = new Application_Model_DbTable_Material() ;
-
         $this->categories=new Application_Model_DbTable_Category();
 
-        // $authorization =Zend_Auth::getInstance();
-        // if(!$authorization->hasIdentity()) {
-        //     $this->redirect('/');      
-        // }
-        // $authNamespace = new Zend_Session_Namespace('Zend_Auth');
-        // $this->$user=$authNamespace->user;
-        // $this->view->user= $this->$useruser;                  
+        $this->view->categories =$this->categories->listCategories() ;
+        $this->view->logged = True ;
+
+        $authorization =Zend_Auth::getInstance();
+        if(!$authorization->hasIdentity()) {
+            $this->redirect('/');      
+        }
+        $authNamespace = new Zend_Session_Namespace('Zend_Auth');
+        $this->user=$authNamespace->user;
+        $this->view->user=$authNamespace->user;
+        if($authNamespace->user['type']!='admin') {
+            $this->redirect('/');      
+        }                 
     }
 
     public function indexAction()
@@ -34,8 +40,8 @@ class CommentController extends Zend_Controller_Action
            if(!empty($body)){
                     $data['body'] = $body ;
                     $data['mid'] = $mid ;
-                    //$data['uid'] = $this->user['id'] ;  
-                    $data['uid'] = 1 ; //check 
+                    $data['uid'] = $this->user['id'] ;  
+                    // $data['uid'] = 1 ; //check 
                     $this->model->addComment($data);
                     //$this->view->addcommentform = $data ;
              }

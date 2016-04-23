@@ -17,6 +17,19 @@ class MatrialController extends Zend_Controller_Action
         $this->matrialModel = new Application_Model_DbTable_Material() ;
         $this->categories=new Application_Model_DbTable_Category();
         $this->addmaterialForm=new Application_Form_AddMatrial();
+        $this->view->categories =$this->categories->listCategories() ;
+        $this->view->logged = True ;
+
+        $authorization =Zend_Auth::getInstance();
+        if(!$authorization->hasIdentity()) {
+            $this->redirect('/');      
+        }
+        $authNamespace = new Zend_Session_Namespace('Zend_Auth');
+        $this->view->user=$authNamespace->user;
+        if($authNamespace->user['type']!='admin') {
+            $this->redirect('/');      
+        }
+
     }
 
     public function indexAction()
