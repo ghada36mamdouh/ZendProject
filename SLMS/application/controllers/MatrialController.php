@@ -47,6 +47,7 @@ class MatrialController extends Zend_Controller_Action
     public function addAction()
     {
         $form = new Application_Form_AddMatrial();
+        $cid = $this->getRequest()->getParam('course_id');
         if($this->getRequest()->isPost()){
             if($form->isValid($_POST)){
                 $data = $form->getValues();
@@ -54,12 +55,24 @@ class MatrialController extends Zend_Controller_Action
                 $type = substr($type,strrpos( $type,'.')+1); 
                 $data['type'] =$type ;            
                 //var_dump($data);
-                $this->model->addMaterial($data);               
-                $this->redirect('/Matrial?cid='.$data['course_id'].'&type='.$type);
+                 if($cid){
+                    $data['course_id']=$cid;
+                 }
+                $this->model->addMaterial($data); 
+                if(!$cid)          
+                    $this->redirect('/Matrial?cid='.$data['course_id'].'&type='.$type);
+                else
+                    $this->redirect('/Matrial/list/?cid='.$data['course_id'].'&type='.$type);
+
             }else{
                 $cid = $this->getRequest()->getParam('cid');
                 $cname = $this->getRequest()->getParam('cname');
-                $this->redirect($baseUrl.'/Matrial/add?cid='.$cid.'&cname='.$cname);                
+                if(!$cid) 
+                    $this->redirect($baseUrl.'/Matrial/add?cid='.$cid.'&cname='.$cname);
+
+                else
+                    $this->redirect($baseUrl.'/Matrial/list/?cid='.$cid.'&cname='.$cname);
+
             }
         
         }else{

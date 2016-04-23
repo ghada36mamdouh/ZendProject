@@ -13,10 +13,17 @@
       <?php
     }
     ?>
-    <li>
-          <a href="<?php echo $this->baseUrl(); ?>">
-          <span class="glyphicon glyphicon-tasks"> </span> Courses</a>
-    </li>
+    <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+        <?php
+          foreach ($this->categories as $category) {
+        ?>
+          <li><a href="<?php echo $this->baseUrl(); ?>/course/list?id=<?php echo $category['id'] ?>"><?php echo $category['name'] ?> </a></li>
+          <?php } ?>
+        </ul>
+      </li>
     </ul>
     </div>
     <div class="col-sm-3">
@@ -58,12 +65,23 @@
         <ul class="adminsidebar">
           <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-users">Users</a></li>
           <li ><a href="<?php echo $this->baseUrl();?>/Admin/list-categories">Categories</a></li>
-          <li class="active"><a href="<?php echo $this->baseUrl();?>/Admin/list-requests">Requests</a></li>
+          <li class="active"><a href="<?php echo $this->baseUrl();?>/Admin/list-requests">Requests</a>
+          <ul>
+                <?php
+                  foreach ($this->courses as $course) {
+                ?>
+                  <li style="background:gray;">
+                      <a href="<?php echo $this->baseUrl(); ?>/Admin/list-requests?id=<?php echo $course['id'] ?>"><?php echo $course['name'] ?> 
+                      </a>
+                  </li>
+                  <?php } ?>
+            </ul>
+          </li>
         </ul>
       </td>
       <td>
    <!-- ############### Body  ################## -->
-      	<h1 align="center">All Requests</h1><br />
+   <h1 align="center">All Requests</h1><br /><br />  	
       	<?php if($this->requests) { 
       		for($i=0; $i<count($this->requests); $i++){ ?>
         			<div class="col-sm-4">

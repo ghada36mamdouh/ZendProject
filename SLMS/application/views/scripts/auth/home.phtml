@@ -1,4 +1,3 @@
-
 <nav class="navbar navbar-inverse">
   <div class="container-fluid row">
     <div class="col-sm-9">
@@ -10,14 +9,26 @@
         if($this->user['type'] == "admin")
         {
           ?>
-      <li><a href="<?php echo $this->baseUrl(); ?>/admin">Admin</a></li>
+      <li><a href="<?php echo $this->baseUrl(); ?>/Admin">Admin</a></li>
       <?php
     }
     ?>
-    <li>
-          <a href="<?php echo $this->baseUrl(); ?>">
+   <!--  <li>
+         <a href="<!?php echo $this->baseUrl(); ?>">
           <span class="glyphicon glyphicon-tasks"> </span> Courses</a>
-    </li>
+
+    </li> -->
+     <li class="dropdown">
+        <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories
+        <span class="caret"></span></a>
+        <ul class="dropdown-menu">
+        <?php
+          foreach ($this->categories as $category) {
+        ?>
+          <li><a href="<?php echo $this->baseUrl(); ?>/course/list?id=<?php echo $category['id'] ?>"><?php echo $category['name'] ?> </a></li>
+          <?php } ?>
+        </ul>
+      </li>
     </ul>
     </div>
     <div class="col-sm-3">
@@ -50,9 +61,6 @@
     </div>
   </div>
 </nav>
-
-
-
 
 
 
@@ -236,7 +244,7 @@
                 }?>
 
                 <?php
-
+                  
                             echo $this->editform;
 
                 ?>

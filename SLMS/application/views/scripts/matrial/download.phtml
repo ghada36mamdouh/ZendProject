@@ -66,8 +66,8 @@
 <!-- Booooody Html   -->
 <div class="text-center">
  <?php
- 	 		header('Content-disposition: inline');
-            header('Content-type: application/msword'); // not sure if this is the correct MIME type
+ 	 		      header('Content-disposition: inline');
+            header('Content-type: application/*'); // not sure if this is the correct MIME type
             readfile($this->matrials['id']);
 
  ?>

@@ -7,6 +7,8 @@ class AuthController extends Zend_Controller_Action
     {
         /* Initialize action controller here */
         $this->identity = Zend_Auth::getInstance()->getIdentity();
+
+        $this->categories=new Application_Model_DbTable_Category();
     }
 
     public function indexAction()
@@ -35,6 +37,8 @@ class AuthController extends Zend_Controller_Action
                     $storage = new Zend_Auth_Storage_Session();
 
                     $loginedUser=$users->getUserByEmail($data['email']);
+                    if(!$loginedUser['isvalid'])
+                        $this->redirect('/auth/logout');
                     $authNamespace = new Zend_Session_Namespace('Zend_Auth');
                     $authNamespace->user = $loginedUser;
                     $this->redirect('/');
@@ -89,6 +93,7 @@ class AuthController extends Zend_Controller_Action
             $form->removeElement('confirmPassword');
             $form->removeElement('gender');
             $form->removeElement('photo');
+            $form->getElement('Register')->setLabel('Update');
             $form->populate($user[0]);
 
             $URL="updateprofile";
@@ -102,12 +107,14 @@ class AuthController extends Zend_Controller_Action
             $form1->removeElement('name');
             $form1->removeElement('country');
             $form1->removeElement('signature');
+            $form1->getElement('Register')->setLabel('Update');
 
 
             $URL1="updatepic";
             $form1->setAction($URL1);
             $this->view->editphoto=$form1;
             $this->view->editform=$form;
+            $this->view->categories=$this->categories->listCategories();
         }
         else
         {

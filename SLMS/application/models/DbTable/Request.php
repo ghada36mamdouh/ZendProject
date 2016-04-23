@@ -9,6 +9,7 @@ class Application_Model_DbTable_Request extends Zend_Db_Table_Abstract
 		$row = $this->createRow();
 		$row->body = $data['body'];
 		$row->uid = $data['uid'];
+		$row->course_id = $data['course_id'];
 		return $row->save();
 	}
 
@@ -19,8 +20,8 @@ class Application_Model_DbTable_Request extends Zend_Db_Table_Abstract
 		$sql = $this->select()->setIntegrityCheck(false)->where('uid='.$uid);
 		return $this->fetchAll($sql)->toArray();
 	}
-	function listRequestsandUsers(){
-		$select = $this->select()->from('request')->join(array('u'=>'users'),'request.uid = u.id',array('name'))->setIntegrityCheck(FALSE); 
+	function listRequestsandUsers($cid){
+		$select = $this->select()->from('request')->join(array('u'=>'users'),'request.uid = u.id',array('name'))->where('request.course_id='.$cid)->setIntegrityCheck(FALSE); 
 		$result = $this->fetchAll($select)->toArray();
 		return $result;
 	}

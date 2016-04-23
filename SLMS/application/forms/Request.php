@@ -22,7 +22,6 @@ class Application_Form_Request extends Zend_Form
         
         $courseID = new Zend_Form_Element_Select('course_id');
         $courseID ->setLabel('This request for Course :');
-        $courseID->addMultiOption(0,'Choose Course ..');
         $courses = new Application_Model_DbTable_Course();
         foreach ($courses->fetchAll() as $course) {
             $courseID->addMultiOption($course['id'],$course['name']);
