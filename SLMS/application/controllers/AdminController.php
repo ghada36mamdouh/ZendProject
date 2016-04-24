@@ -66,8 +66,10 @@ class AdminController extends Zend_Controller_Action
     public function categoryCoursesAction()
     {
         $id = $this->getRequest()->getParam('id');
-        if($id)
+        if($id){
             $this->view->courses = $this->courseModel->listCategoryCourses($id);
+            $this->view->cid = $id;
+        }
     }
     public function addUserAction()
     {
