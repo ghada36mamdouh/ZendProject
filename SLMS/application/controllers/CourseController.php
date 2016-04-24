@@ -8,18 +8,32 @@ class CourseController extends Zend_Controller_Action
         /* Initialize action controller here */
         $this->course=new Application_Model_DbTable_Course();
         $this->categories=new Application_Model_DbTable_Category();
+        $authorization =Zend_Auth::getInstance();
+        if(!$authorization->hasIdentity()) {
+            $this->redirect('/');      
+        }
     }
 
     public function indexAction()
     {
         // action body
     }
-    
+
+    public function addAction()
+    {
+        $form=new Application_Form_addcourse();
+       if($this->getRequest()->isPost()){
+            if($form->isValid($_POST)){
+                $data = $form->getValues();
+                $this->view->data ;
+                $this->course->addCourse($data);
+            }  
+        }
+        $this->redirect('Admin/category-courses/id/'.$data['cid']);
+    }
     function listAction()
     {
         // action body
-
-
 	    $LoginedUser=Zend_Auth::getInstance();
     	if($LoginedUser->hasIdentity())
     	{
@@ -69,6 +83,14 @@ class CourseController extends Zend_Controller_Action
             $this->view->registform = $registform;
     	}
 	}
+
+    public function deleteAction()
+    {
+       $id=$this->getRequest()->id;
+       $cid=$this->getRequest()->cid;
+       $this->course->deleteCourse($id);
+       $this->redirect('Admin/category-courses/id/'.$cid);
+    }
 
 
 }

@@ -56,17 +56,25 @@
     </div>
   </div>
 </nav>
-
-<!-- end nav -->
-
-
-
-<br />
-<div id="view-content" class="container addMatrail">
-	<!-- <p>View script for controller <b>Matrial</b> and script/action name <b>add</b></p> -->
-
-	<h4 style="text-align: center" >Add new Matrial for <?php  echo $this->cname ?></h4>
-	<?php echo  $this->form ; ?>
-
-
+    <!-- ###############  end nav  ################## -->
+<div class="container">
+  <table cellpadding="10" cellspacing="10" width="100%" height="100%">
+    <tr>
+      <td valign="top" width="15%" color="black">
+        <br><br><br><br>
+        <ul class="adminsidebar">
+          <li><a href="<?php echo $this->baseUrl();?>/Admin/list-users">Users</a></li>
+          <li class="active"><a href="<?php echo $this->baseUrl();?>/Admin/list-categories">Categories</a></li>
+          <li><a href="<?php echo $this->baseUrl();?>/Admin/list-requests">Requests</a></li>
+        </ul>
+      </td>
+      <td>
+   <!-- ############### Body  ################## -->
+      	<h1 align="center">add Course</h1><br />
+      	<?php echo $this->form ?>
+      	</div>
+   <!-- ###############  end Body  ################## -->
+      </td>
+    </tr>
+  </table>
 </div>

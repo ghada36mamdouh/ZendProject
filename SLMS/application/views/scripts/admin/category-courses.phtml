@@ -70,17 +70,22 @@
       </td>
       <td>
    <!-- ############### Body  ################## -->
+
       <?php if($this->courses) {?>
       	<h1 align="center"><?php echo $this->courses[0]['cname'] ?> courses</h1><br />
+        <a class ="addlink" href="<?php echo $this->baseUrl(); ?>/Admin/add-course?cid=<?php echo $this->courses[0]['cid'] ?>"> Add Course </a><br><br>
       		<?php for($i=0; $i<count($this->courses); $i++){ ?>
         			<div class="col-sm-4">
       				<div class="panel panel-primary">
       					<div class="panel-heading"><?php echo  $this->courses[$i]['name'];?></div>
-      				  	<div class="panel-body">
+      				  	<div class="panel-body ">
+                    <div class="text-center"><img src="<?php echo $this->baseUrl(); ?>/images/<?php echo  $this->courses[$i]['logo'];?>" width="200px" height="150px" /><br></div>  
       				  		<?php echo  $this->courses[$i]['description'];?>
       				  	</div>
                   <div class="panel-footer">
-                    <a href="<?php echo $this->baseUrl();?>/matrial/?cid=<?php echo $this->courses[$i]['id'];?>&type=pdf">Matrial</a>
+                    <a class="btn btn-success" href="<?php echo $this->baseUrl();?>/matrial/?cid=<?php echo $this->courses[$i]['id'];?>&type=pdf">Matrial</a>
+                    <a class="btn btn-primary" href="<?php echo $this->baseUrl();?>/course/?id=<?php echo $this->courses[$i]['id'];?>">Update</a>
+                     <a class="btn btn-danger" href="<?php echo $this->baseUrl();?>/course/delete/?id=<?php echo $this->courses[$i]['id'];?>&cid=<?php echo $this->courses[$i]['cid'];?>">Delete</a>
                   </div>
       				</div>
       			</div>

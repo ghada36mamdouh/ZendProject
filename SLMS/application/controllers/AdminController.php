@@ -55,12 +55,12 @@ class AdminController extends Zend_Controller_Action
     {
         $courses=$this->courseModel->listCourses();
         $this->view->courses=$courses;
-        $id = $this->getRequest()->getParam('id');
-        $cid=0;
+        $id = $this->getRequest()->id;
+        $cid=1;
         if($id)
-            $cid=$id-1;
+            $cid=$id;
         
-        $this->view->requests = $this->requestModel->listRequestsandUsers($courses[$cid]['id']);
+        $this->view->requests = $this->requestModel->listRequestsandUsers($cid);
 
     }
     public function categoryCoursesAction()
@@ -83,6 +83,15 @@ class AdminController extends Zend_Controller_Action
     public function addCategoryAction()
     {
         $this->view->form=new Application_Form_addcategory;
+    }
+    public function addCourseAction()
+    {
+        $form=new Application_Form_addcourse;
+        $id = $this->getRequest()->getParam('cid');
+        //echo 'id= '.$id ;
+        if($id)
+            $form->setDefault('cid',$id);
+        $this->view->form=$form;
     }
 
 }

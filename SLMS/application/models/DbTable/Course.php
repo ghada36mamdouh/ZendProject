@@ -8,6 +8,7 @@ class Application_Model_DbTable_Course extends Zend_Db_Table_Abstract
 		$row = $this->createRow();
 		$row->name = $data['name'];
 		$row->description = $data['description'];
+		$row->logo = $data['logo'];
 		$row->cid = $data['cid'];
 		return $row->save();
 	}

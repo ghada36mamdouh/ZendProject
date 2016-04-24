@@ -9,16 +9,11 @@
         if($this->user['type'] == "admin")
         {
           ?>
-      <li><a href="<?php echo $this->baseUrl(); ?>/Admin">Admin</a></li>
+      <li><a href="<?php echo $this->baseUrl(); ?>/auth/home">User</a></li>
       <?php
     }
     ?>
-   <!--  <li>
-         <a href="<!?php echo $this->baseUrl(); ?>">
-          <span class="glyphicon glyphicon-tasks"> </span> Courses</a>
-
-    </li> -->
-     <li class="dropdown">
+    <li class="dropdown">
         <a class="dropdown-toggle" data-toggle="dropdown" href="#">Categories
         <span class="caret"></span></a>
         <ul class="dropdown-menu">
@@ -61,12 +56,11 @@
     </div>
   </div>
 </nav>
-
 <!-- end nav -->
 
 <br />
 
-<div id="view-content" class="container">
+<div id="view-content" class="container listMatrial">
 	<!-- <p>View script for controller <b>Matrial</b> and script/action name <b>index</b></p> -->
 	<h3><?php echo $this->course[0]['name'] ;?> Course</h3><br>
 	<?php 
